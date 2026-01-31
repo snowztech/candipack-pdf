@@ -13,9 +13,28 @@ Open source PDF generation engine for resumes and cover letters using JSON Resum
 
 ## Quick Start
 
+### Using Docker Compose (Recommended)
+
 ```bash
 # Clone
-git clone https://github.com/lucasnevespereira/candipack-pdf.git
+git clone https://github.com/snowztech/candipack-pdf.git
+cd candipack-pdf
+
+# Create environment file (optional)
+cp .env.example .env
+
+# Launch with Docker Compose
+docker-compose up
+
+# Test health endpoint
+curl http://localhost:9000/health
+```
+
+### Local Development
+
+```bash
+# Clone
+git clone https://github.com/snowztech/candipack-pdf.git
 cd candipack-pdf
 
 # Install dependencies
@@ -147,6 +166,24 @@ The API accepts JSON following the [JSON Resume](https://jsonresume.org/) schema
 
 ## Docker
 
+### Docker Compose (Recommended)
+
+```bash
+# Build and run
+docker-compose up
+
+# Run in background
+docker-compose up -d
+
+# Stop
+docker-compose down
+
+# Rebuild after changes
+docker-compose up --build
+```
+
+### Docker (Manual)
+
 ```bash
 # Build
 docker build -t candipack-pdf .
@@ -187,4 +224,4 @@ candipack-pdf/
 
 ## License
 
-MIT License - See LICENSE file for details
+MIT License - See [LICENSEE](LICENSE) file for details
