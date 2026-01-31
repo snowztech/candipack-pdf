@@ -1,0 +1,174 @@
+{
+  "meta": {
+    "template": "professional",
+    "lang": "en"
+  },
+  "basics": {
+    "name": "Jane Smith",
+    "label": "Software Engineer",
+    "image": "",
+    "email": "jane.smith@example.com",
+    "phone": "+1 555-123-4567",
+    "url": "https://janesmith.dev",
+    "summary": "Passionate software engineer with 5+ years of experience building scalable web applications. Specialized in Go, TypeScript, and cloud infrastructure.",
+    "location": {
+      "city": "San Francisco",
+      "countryCode": "US",
+      "region": "California"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "janesmith",
+        "url": "https://linkedin.com/in/janesmith"
+      },
+      {
+        "network": "GitHub",
+        "username": "janesmith",
+        "url": "https://github.com/janesmith"
+      }
+    ]
+  },
+  "work": [
+    {
+      "position": "Senior Software Engineer",
+      "company": "TechCorp Inc.",
+      "location": "San Francisco, CA",
+      "startDate": "2021-03",
+      "endDate": "Present",
+      "summary": "Leading backend development team, architecting microservices",
+      "highlights": [
+        "Reduced API latency by 40% through caching optimization",
+        "Migrated monolith to microservices architecture",
+        "Led team of 5 engineers"
+      ],
+      "contractType": "Full-time"
+    },
+    {
+      "position": "Software Engineer",
+      "company": "StartupXYZ",
+      "location": "Palo Alto, CA",
+      "startDate": "2019-06",
+      "endDate": "2021-02",
+      "summary": "Full-stack development for SaaS platform",
+      "highlights": [
+        "Built real-time notification system using WebSockets",
+        "Implemented payment processing with Stripe",
+        "Contributed to open-source projects"
+      ],
+      "contractType": "Full-time"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Stanford University",
+      "area": "Computer Science",
+      "studyType": "B.S.",
+      "location": "Stanford, CA",
+      "startDate": "2015-09",
+      "endDate": "2019-05",
+      "score": "3.8 GPA",
+      "courses": [
+        "Advanced Algorithms",
+        "Distributed Systems",
+        "Machine Learning"
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "title": "AWS Solutions Architect",
+      "date": "2022-08",
+      "issuer": "Amazon Web Services",
+      "score": "",
+      "url": "https://aws.amazon.com/certification"
+    },
+    {
+      "title": "Google Cloud Professional",
+      "date": "2023-03",
+      "issuer": "Google Cloud",
+      "score": "",
+      "url": "https://cloud.google.com/certification"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Go",
+      "level": "Expert",
+      "keywords": ["Gin", "gRPC", "Microservices"]
+    },
+    {
+      "name": "TypeScript",
+      "level": "Advanced",
+      "keywords": ["React", "Node.js", "Next.js"]
+    },
+    {
+      "name": "Cloud",
+      "level": "Advanced",
+      "keywords": ["AWS", "GCP", "Kubernetes", "Docker"]
+    },
+    {
+      "name": "Databases",
+      "level": "Advanced",
+      "keywords": ["PostgreSQL", "MongoDB", "Redis"]
+    }
+  ],
+  "softSkills": [
+    {
+      "name": "Leadership",
+      "level": "Advanced",
+      "keywords": []
+    },
+    {
+      "name": "Communication",
+      "level": "Expert",
+      "keywords": []
+    },
+    {
+      "name": "Problem Solving",
+      "level": "Expert",
+      "keywords": []
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native"
+    },
+    {
+      "language": "Spanish",
+      "fluency": "Professional"
+    },
+    {
+      "language": "French",
+      "fluency": "Basic"
+    }
+  ],
+  "projects": [
+    {
+      "name": "OpenSource PDF Generator",
+      "description": "PDF generation service for resumes and cover letters",
+      "highlights": [
+        "Built with Go and ChromeDP",
+        "Supports multiple templates",
+        "Handles 1000+ requests per day"
+      ],
+      "url": "https://github.com/example/pdf-gen",
+      "stackDetails": "Go, ChromeDP, Docker"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Open Source",
+      "keywords": ["Go", "Rust"]
+    },
+    {
+      "name": "Machine Learning",
+      "keywords": ["NLP", "Computer Vision"]
+    },
+    {
+      "name": "Rock Climbing",
+      "keywords": ["Bouldering", "Sport"]
+    }
+  ]
+}

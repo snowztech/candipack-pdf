@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="{{.Meta.Lang}}">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 12pt;
+        line-height: 1.7;
+        color: #1a1a1a;
+      }
+      .letter {
+        padding: 50px 60px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .sender-name {
+        font-size: 22pt;
+        font-weight: 400;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .sender-contact {
+        font-size: 10pt;
+        font-style: italic;
+        color: #555;
+      }
+
+      .date {
+        text-align: right;
+        font-variant: small-caps;
+        margin-bottom: 30px;
+      }
+
+      .recipient {
+        margin-bottom: 24px;
+        font-size: 11pt;
+      }
+      .subject {
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      .salutation {
+        margin-bottom: 16px;
+      }
+
+      .paragraph {
+        text-align: justify;
+        text-indent: 2em;
+        margin-bottom: 12px;
+      }
+
+      .closing {
+        margin-top: 28px;
+        margin-bottom: 50px;
+      }
+      .signature {
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="letter">
+      <header class="header">
+        <h1 class="sender-name">{{.Sender.Name}}</h1>
+        <p class="sender-contact">
+          {{.Sender.Address}}<br />
+          {{.Sender.Phone}} · {{.Sender.Email}}
+        </p>
+      </header>
+
+      <p class="date">{{.Date}}</p>
+
+      {{if or .Recipient.Company .Recipient.Address}}
+      <div class="recipient">
+        {{if .Recipient.Company}}
+        <p>{{.Recipient.Company}}</p>
+        {{end}} {{if .Recipient.Address}}
+        <p>{{.Recipient.Address}}</p>
+        {{end}}
+      </div>
+      {{end}}
+
+      <p class="subject">{{.Subject}}</p>
+      <p class="salutation">{{.Salutation}}</p>
+
+      {{range .Paragraphs}}
+      <p class="paragraph">{{.}}</p>
+      {{end}}
+
+      <p class="closing">{{.Closing}}</p>
+      <p class="signature">{{.Signature}}</p>
+    </div>
+  </body>
+</html>
