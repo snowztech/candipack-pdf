@@ -224,4 +224,4 @@ candipack-pdf/
 
 ## License
 
-MIT License - See [LICENSEE](LICENSE) file for details
+MIT License - See [license](LICENSE) file for details
