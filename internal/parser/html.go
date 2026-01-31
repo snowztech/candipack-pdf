@@ -28,7 +28,7 @@ func (p *HTMLParser) ParseResume(templateName string, resume models.Resume, labe
 
 	tmpl, err := template.ParseFiles(templatePath)
 	if err != nil {
-		return "", fmt.Errorf("failed to parse template: %w", err)
+		return "", err
 	}
 
 	data := resumeTemplateData{

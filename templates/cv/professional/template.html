@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{.Meta.Lang}}">
   <head>
     <meta charset="UTF-8" />
@@ -182,7 +182,7 @@
           {{if .Basics.URL}}
           <p>{{.Basics.URL}}</p>
           {{end}}
-          <p style="margin-top: 8px;">{{.Basics.Location.City}}</p>
+          <p style="margin-top: 8px">{{.Basics.Location.City}}</p>
           {{if .Basics.Location.Region}}
           <p>{{.Basics.Location.Region}}</p>
           {{end}}
@@ -197,9 +197,7 @@
             {{end}}
           </ul>
         </section>
-        {{end}}
-
-        {{if .SoftSkills}}
+        {{end}} {{if .SoftSkills}}
         <section>
           <h2>{{.Labels.SoftSkills}}</h2>
           <ul>
@@ -208,9 +206,7 @@
             {{end}}
           </ul>
         </section>
-        {{end}}
-
-        {{if .Languages}}
+        {{end}} {{if .Languages}}
         <section>
           <h2>{{.Labels.Languages}}</h2>
           {{range .Languages}}
@@ -220,9 +216,7 @@
           </div>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Interests}}
+        {{end}} {{if .Interests}}
         <section>
           <h2>{{.Labels.Interests}}</h2>
           {{range .Interests}}
@@ -237,8 +231,7 @@
           <h1 class="name">{{.Basics.Name}}</h1>
           {{if .Basics.Label}}
           <p class="job-title">{{.Basics.Label}}</p>
-          {{end}}
-          {{if .Basics.Summary}}
+          {{end}} {{if .Basics.Summary}}
           <p class="summary">{{.Basics.Summary}}</p>
           {{end}}
         </header>
@@ -260,20 +253,17 @@
           </div>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Education}}
+        {{end}} {{if .Education}}
         <section>
           <h2>{{.Labels.Education}}</h2>
           {{range .Education}}
           <p class="edu-item">
-            <span class="edu-degree">{{.StudyType}} {{.Area}}</span> – {{.Institution}}
+            <span class="edu-degree">{{.StudyType}} {{.Area}}</span> –
+            {{.Institution}}
           </p>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Certificates}}
+        {{end}} {{if .Certificates}}
         <section>
           <h2>{{.Labels.Certificates}}</h2>
           {{range .Certificates}}
@@ -282,9 +272,7 @@
           </p>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Projects}}
+        {{end}} {{if .Projects}}
         <section>
           <h2>{{.Labels.Projects}}</h2>
           {{range .Projects}}
@@ -301,15 +289,15 @@
           </div>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Volunteer}}
+        {{end}} {{if .Volunteer}}
         <section>
           <h2>{{.Labels.Volunteer}}</h2>
           {{range .Volunteer}}
           <div class="experience">
             <p class="exp-title">{{.Position}}</p>
-            <p class="exp-company">{{.Organization}} ({{.StartDate}} - {{.EndDate}})</p>
+            <p class="exp-company">
+              {{.Organization}} ({{.StartDate}} - {{.EndDate}})
+            </p>
             <ul class="exp-missions">
               {{range .Highlights}}
               <li>{{.}}</li>
@@ -318,14 +306,13 @@
           </div>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Publications}}
+        {{end}} {{if .Publications}}
         <section>
           <h2>{{.Labels.Publications}}</h2>
           {{range .Publications}}
           <p class="edu-item">
-            <span class="edu-degree">{{.Name}}</span> – {{.Publisher}} ({{.ReleaseDate}})
+            <span class="edu-degree">{{.Name}}</span> – {{.Publisher}}
+            ({{.ReleaseDate}})
           </p>
           {{end}}
         </section>

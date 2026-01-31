@@ -8,11 +8,14 @@ fmt:
 lint: fmt
 	golangci-lint run
 
-run:
-	go run *.go server
+logs:
+	docker-compose logs -f
 
 build:
-	go build -o bin/$(APP_NAME)
+	docker-compose build
+
+run:
+	docker-compose up
 
 clean:
 	rm -rf output
