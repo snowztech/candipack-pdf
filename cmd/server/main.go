@@ -23,9 +23,12 @@ func main() {
 	// Initialize handlers
 	h := handlers.New()
 
+	apirouter := router.Group("/api")
+
 	// Routes
-	router.POST("/resume", h.HandleResume())
-	router.POST("/cover-letter", h.HandleCoverLetter())
+	apirouter.POST("/resume", h.HandleResume())
+	apirouter.POST("/resume/html", h.HandleResumeHTML())
+	apirouter.POST("/cover-letter", h.HandleCoverLetter())
 	router.GET("/templates", h.HandleTemplates())
 	router.GET("/up", func(c *gin.Context) {
 		c.String(200, "ok")

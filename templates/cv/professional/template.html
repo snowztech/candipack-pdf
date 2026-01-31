@@ -204,19 +204,15 @@
           <p>{{.Basics.Email}}</p>
           {{if .Basics.URL}}
           <p>{{.Basics.URL}}</p>
-          {{end}}
-          {{if .Basics.Location.Address}}
+          {{end}} {{if .Basics.Location.Address}}
           <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
-          {{end}}
-          {{if .Basics.Location.PostalCode}}
+          {{end}} {{if .Basics.Location.PostalCode}}
           <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
           {{else}}
           <p style="margin-top: 8px">{{.Basics.Location.City}}</p>
-          {{end}}
-          {{if .Basics.Location.Region}}
+          {{end}} {{if .Basics.Location.Region}}
           <p>{{.Basics.Location.Region}}</p>
-          {{end}}
-          {{if .Basics.Nationality}}
+          {{end}} {{if .Basics.Nationality}}
           <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
           {{end}}
         </section>
@@ -230,9 +226,7 @@
             {{end}}
           </ul>
         </section>
-        {{end}}
-
-        {{if .SoftSkills}}
+        {{end}} {{if .SoftSkills}}
         <section>
           <h2>{{.Labels.SoftSkills}}</h2>
           <ul>
@@ -241,9 +235,7 @@
             {{end}}
           </ul>
         </section>
-        {{end}}
-
-        {{if .Languages}}
+        {{end}} {{if .Languages}}
         <section>
           <h2>{{.Labels.Languages}}</h2>
           <ul>
@@ -261,11 +253,9 @@
           <div class="additional-info">
             {{if .Meta.ActivityRate}}
             <p>Taux souhaité: {{.Meta.ActivityRate}}</p>
-            {{end}}
-            {{if .Meta.Availability}}
+            {{end}} {{if .Meta.Availability}}
             <p>Disponibilité: {{.Meta.Availability}}</p>
-            {{end}}
-            {{if .Meta.WorkPermit}}
+            {{end}} {{if .Meta.WorkPermit}}
             <p>Permis de travail: {{.Meta.WorkPermit}}</p>
             {{end}}
           </div>
@@ -283,9 +273,7 @@
           </div>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Interests}}
+        {{end}} {{if .Interests}}
         <section>
           <h2>{{.Labels.Interests}}</h2>
           {{range .Interests}}
@@ -300,8 +288,7 @@
           <h1 class="name">{{.Basics.Name}}</h1>
           {{if .Basics.Label}}
           <p class="job-title">{{.Basics.Label}}</p>
-          {{end}}
-          {{if .Basics.Summary}}
+          {{end}} {{if .Basics.Summary}}
           <p class="summary">{{.Basics.Summary}}</p>
           {{end}}
         </header>
@@ -313,7 +300,11 @@
           <div class="experience">
             <div class="exp-header">
               {{if .CompanyLogo}}
-              <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo" />
+              <img
+                src="{{.CompanyLogo}}"
+                alt="{{.Company}}"
+                class="company-logo"
+              />
               {{end}}
               <div>
                 <p class="exp-title">{{.Position}}</p>
@@ -330,9 +321,7 @@
           </div>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Education}}
+        {{end}} {{if .Education}}
         <section>
           <h2>{{.Labels.Education}}</h2>
           {{range .Education}}
@@ -342,9 +331,7 @@
           </p>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Certificates}}
+        {{end}} {{if .Certificates}}
         <section>
           <h2>{{.Labels.Certificates}}</h2>
           {{range .Certificates}}
@@ -353,9 +340,7 @@
           </p>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Projects}}
+        {{end}} {{if .Projects}}
         <section>
           <h2>{{.Labels.Projects}}</h2>
           {{range .Projects}}
@@ -372,9 +357,7 @@
           </div>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Volunteer}}
+        {{end}} {{if .Volunteer}}
         <section>
           <h2>{{.Labels.Volunteer}}</h2>
           {{range .Volunteer}}
@@ -391,9 +374,7 @@
           </div>
           {{end}}
         </section>
-        {{end}}
-
-        {{if .Publications}}
+        {{end}} {{if .Publications}}
         <section>
           <h2>{{.Labels.Publications}}</h2>
           {{range .Publications}}

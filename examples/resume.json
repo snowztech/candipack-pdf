@@ -1,7 +1,10 @@
 {
   "meta": {
     "template": "professional",
-    "lang": "en"
+    "lang": "en",
+    "availability": "Immediately",
+    "activityRate": "100%",
+    "workPermit": "US Citizen"
   },
   "basics": {
     "name": "Jane Smith",
