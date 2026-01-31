@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -45,7 +46,11 @@ func (p *HTMLParser) ParseResume(templateName string, resume models.Resume, labe
 	if err != nil {
 		return "", fmt.Errorf("failed to create temp file: %w", err)
 	}
-	defer tempFile.Close()
+	defer func() {
+		if err := tempFile.Close(); err != nil {
+			log.Printf("Warning: failed to close temp file: %v", err)
+		}
+	}()
 
 	if _, err := tempFile.Write(buf.Bytes()); err != nil {
 		return "", fmt.Errorf("failed to write to temp file: %w", err)
@@ -71,7 +76,11 @@ func (p *HTMLParser) ParseCoverLetter(templateName string, coverLetter models.Co
 	if err != nil {
 		return "", fmt.Errorf("failed to create temp file: %w", err)
 	}
-	defer tempFile.Close()
+	defer func() {
+		if err := tempFile.Close(); err != nil {
+			log.Printf("Warning: failed to close temp file: %v", err)
+		}
+	}()
 
 	if _, err := tempFile.Write(buf.Bytes()); err != nil {
 		return "", fmt.Errorf("failed to write to temp file: %w", err)

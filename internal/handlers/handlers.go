@@ -5,6 +5,7 @@ import (
 	"candipack-pdf/internal/lang"
 	"candipack-pdf/internal/models"
 	"candipack-pdf/internal/parser"
+	"log"
 	"net/http"
 	"os"
 
@@ -59,7 +60,11 @@ func (h *Handler) HandleResume() gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse template: " + err.Error()})
 			return
 		}
-		defer os.Remove(htmlFile)
+		defer func() {
+			if err := os.Remove(htmlFile); err != nil {
+				log.Printf("Warning: failed to remove temp file: %v", err)
+			}
+		}()
 
 		pdf, err := h.generator.GeneratePDF(htmlFile)
 		if err != nil {
@@ -91,7 +96,11 @@ func (h *Handler) HandleCoverLetter() gin.HandlerFunc {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse template: " + err.Error()})
 			return
 		}
-		defer os.Remove(htmlFile)
+		defer func() {
+			if err := os.Remove(htmlFile); err != nil {
+				log.Printf("Warning: failed to remove temp file: %v", err)
+			}
+		}()
 
 		pdf, err := h.generator.GeneratePDF(htmlFile)
 		if err != nil {
