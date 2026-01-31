@@ -17,9 +17,6 @@ func NewGenerator() *Generator {
 }
 
 func (g *Generator) GeneratePDF(htmlFile string) ([]byte, error) {
-	chromeCtx, cancel := chromedp.NewContext(context.Background())
-	defer cancel()
-
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
 		chromedp.ExecPath(os.Getenv("CHROME_PATH")),
 		chromedp.Headless,
@@ -29,7 +26,7 @@ func (g *Generator) GeneratePDF(htmlFile string) ([]byte, error) {
 
 	allocCtx, allocCancel := chromedp.NewExecAllocator(context.Background(), opts...)
 	defer allocCancel()
-	chromeCtx, cancel = chromedp.NewContext(allocCtx)
+	chromeCtx, cancel := chromedp.NewContext(allocCtx)
 	defer cancel()
 
 	var pdf []byte
