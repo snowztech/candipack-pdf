@@ -40,19 +40,21 @@ func (h *Handler) HandleResume() gin.HandlerFunc {
 		}
 
 		labels := map[string]string{
-			"Education":    lang.Translate(resumeData.Meta.Lang, "Education"),
-			"Experiences":  lang.Translate(resumeData.Meta.Lang, "Experiences"),
-			"Volunteer":    lang.Translate(resumeData.Meta.Lang, "Volunteer"),
-			"Publications": lang.Translate(resumeData.Meta.Lang, "Publications"),
-			"Projects":     lang.Translate(resumeData.Meta.Lang, "Projects"),
-			"Skills":       lang.Translate(resumeData.Meta.Lang, "Skills"),
-			"SoftSkills":   lang.Translate(resumeData.Meta.Lang, "SoftSkills"),
-			"Languages":    lang.Translate(resumeData.Meta.Lang, "Languages"),
-			"Interests":    lang.Translate(resumeData.Meta.Lang, "Interests"),
-			"Profile":      lang.Translate(resumeData.Meta.Lang, "Profile"),
-			"Since":        lang.Translate(resumeData.Meta.Lang, "Since"),
-			"Certificates": lang.Translate(resumeData.Meta.Lang, "Certificates"),
-			"Socials":      lang.Translate(resumeData.Meta.Lang, "Socials"),
+			"Education":      lang.Translate(resumeData.Meta.Lang, "Education"),
+			"Experiences":    lang.Translate(resumeData.Meta.Lang, "Experiences"),
+			"Volunteer":      lang.Translate(resumeData.Meta.Lang, "Volunteer"),
+			"Publications":   lang.Translate(resumeData.Meta.Lang, "Publications"),
+			"Projects":       lang.Translate(resumeData.Meta.Lang, "Projects"),
+			"Skills":         lang.Translate(resumeData.Meta.Lang, "Skills"),
+			"SoftSkills":     lang.Translate(resumeData.Meta.Lang, "SoftSkills"),
+			"Languages":      lang.Translate(resumeData.Meta.Lang, "Languages"),
+			"Interests":      lang.Translate(resumeData.Meta.Lang, "Interests"),
+			"Profile":        lang.Translate(resumeData.Meta.Lang, "Profile"),
+			"Since":          lang.Translate(resumeData.Meta.Lang, "Since"),
+			"Certificates":   lang.Translate(resumeData.Meta.Lang, "Certificates"),
+			"Socials":        lang.Translate(resumeData.Meta.Lang, "Socials"),
+			"AdditionalInfo": lang.Translate(resumeData.Meta.Lang, "AdditionalInfo"),
+			"References":     lang.Translate(resumeData.Meta.Lang, "References"),
 		}
 
 		htmlFile, err := h.parser.ParseResume(resumeData.Meta.Template, resumeData, labels)

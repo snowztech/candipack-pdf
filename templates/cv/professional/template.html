@@ -30,16 +30,16 @@
         height: 100%;
       }
 
-      /* Sidebar */
+      /* Sidebar - Dark Navy */
       .sidebar {
         width: 38%;
-        background: #3d5167;
+        background: #1a1a2e;
         color: white;
         padding: 30px 24px;
       }
       .photo {
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 140px;
         border-radius: 50%;
         object-fit: cover;
         border: 3px solid rgba(255, 255, 255, 0.2);
@@ -72,13 +72,23 @@
         opacity: 0.7;
       }
       .lang-item {
-        display: flex;
-        justify-content: space-between;
+        margin-bottom: 4px;
+        font-size: 10pt;
+      }
+      .additional-info p {
         margin-bottom: 4px;
       }
-      .lang-level {
-        opacity: 0.8;
+      .reference-item {
+        margin-bottom: 12px;
+      }
+      .reference-item strong {
+        display: block;
+        margin-bottom: 2px;
+      }
+      .reference-item p {
         font-size: 9pt;
+        opacity: 0.8;
+        line-height: 1.4;
       }
 
       /* Main */
@@ -137,6 +147,19 @@
         border-radius: 50%;
         background: white;
       }
+      .exp-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 4px;
+      }
+      .company-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
       .exp-title {
         font-size: 12pt;
         font-weight: 600;
@@ -146,12 +169,12 @@
         font-size: 10pt;
         color: #e07c4c;
         font-weight: 500;
-        margin-bottom: 4px;
       }
       .exp-missions {
         padding-left: 16px;
         font-size: 9pt;
         color: #4a5568;
+        margin-top: 4px;
       }
       .exp-missions li {
         margin-bottom: 2px;
@@ -182,9 +205,19 @@
           {{if .Basics.URL}}
           <p>{{.Basics.URL}}</p>
           {{end}}
+          {{if .Basics.Location.Address}}
+          <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
+          {{end}}
+          {{if .Basics.Location.PostalCode}}
+          <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
+          {{else}}
           <p style="margin-top: 8px">{{.Basics.Location.City}}</p>
+          {{end}}
           {{if .Basics.Location.Region}}
           <p>{{.Basics.Location.Region}}</p>
+          {{end}}
+          {{if .Basics.Nationality}}
+          <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
           {{end}}
         </section>
 
@@ -197,7 +230,9 @@
             {{end}}
           </ul>
         </section>
-        {{end}} {{if .SoftSkills}}
+        {{end}}
+
+        {{if .SoftSkills}}
         <section>
           <h2>{{.Labels.SoftSkills}}</h2>
           <ul>
@@ -206,17 +241,51 @@
             {{end}}
           </ul>
         </section>
-        {{end}} {{if .Languages}}
+        {{end}}
+
+        {{if .Languages}}
         <section>
           <h2>{{.Labels.Languages}}</h2>
-          {{range .Languages}}
-          <div class="lang-item">
-            <span>{{.Language}}</span>
-            <span class="lang-level">{{.Fluency}}</span>
+          <ul>
+            {{range .Languages}}
+            <li class="lang-item">{{.Language}} ({{.Fluency}})</li>
+            {{end}}
+          </ul>
+        </section>
+        {{end}}
+
+        <!-- Informations Complémentaires -->
+        {{if or .Meta.ActivityRate .Meta.Availability .Meta.WorkPermit}}
+        <section>
+          <h2>{{.Labels.AdditionalInfo}}</h2>
+          <div class="additional-info">
+            {{if .Meta.ActivityRate}}
+            <p>Taux souhaité: {{.Meta.ActivityRate}}</p>
+            {{end}}
+            {{if .Meta.Availability}}
+            <p>Disponibilité: {{.Meta.Availability}}</p>
+            {{end}}
+            {{if .Meta.WorkPermit}}
+            <p>Permis de travail: {{.Meta.WorkPermit}}</p>
+            {{end}}
+          </div>
+        </section>
+        {{end}}
+
+        <!-- References -->
+        {{if .References}}
+        <section>
+          <h2>{{.Labels.References}}</h2>
+          {{range .References}}
+          <div class="reference-item">
+            <strong>{{.Name}}</strong>
+            <p>{{.Reference}}</p>
           </div>
           {{end}}
         </section>
-        {{end}} {{if .Interests}}
+        {{end}}
+
+        {{if .Interests}}
         <section>
           <h2>{{.Labels.Interests}}</h2>
           {{range .Interests}}
@@ -231,7 +300,8 @@
           <h1 class="name">{{.Basics.Name}}</h1>
           {{if .Basics.Label}}
           <p class="job-title">{{.Basics.Label}}</p>
-          {{end}} {{if .Basics.Summary}}
+          {{end}}
+          {{if .Basics.Summary}}
           <p class="summary">{{.Basics.Summary}}</p>
           {{end}}
         </header>
@@ -241,10 +311,17 @@
           <h2>{{.Labels.Experiences}}</h2>
           {{range .Work}}
           <div class="experience">
-            <p class="exp-title">{{.Position}}</p>
-            <p class="exp-company">
-              {{.Company}} – {{.Location}} ({{.StartDate}} - {{.EndDate}})
-            </p>
+            <div class="exp-header">
+              {{if .CompanyLogo}}
+              <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo" />
+              {{end}}
+              <div>
+                <p class="exp-title">{{.Position}}</p>
+                <p class="exp-company">
+                  {{.Company}} – {{.Location}} ({{.StartDate}} - {{.EndDate}})
+                </p>
+              </div>
+            </div>
             <ul class="exp-missions">
               {{range .Highlights}}
               <li>{{.}}</li>
@@ -253,7 +330,9 @@
           </div>
           {{end}}
         </section>
-        {{end}} {{if .Education}}
+        {{end}}
+
+        {{if .Education}}
         <section>
           <h2>{{.Labels.Education}}</h2>
           {{range .Education}}
@@ -263,7 +342,9 @@
           </p>
           {{end}}
         </section>
-        {{end}} {{if .Certificates}}
+        {{end}}
+
+        {{if .Certificates}}
         <section>
           <h2>{{.Labels.Certificates}}</h2>
           {{range .Certificates}}
@@ -272,7 +353,9 @@
           </p>
           {{end}}
         </section>
-        {{end}} {{if .Projects}}
+        {{end}}
+
+        {{if .Projects}}
         <section>
           <h2>{{.Labels.Projects}}</h2>
           {{range .Projects}}
@@ -289,7 +372,9 @@
           </div>
           {{end}}
         </section>
-        {{end}} {{if .Volunteer}}
+        {{end}}
+
+        {{if .Volunteer}}
         <section>
           <h2>{{.Labels.Volunteer}}</h2>
           {{range .Volunteer}}
@@ -306,7 +391,9 @@
           </div>
           {{end}}
         </section>
-        {{end}} {{if .Publications}}
+        {{end}}
+
+        {{if .Publications}}
         <section>
           <h2>{{.Labels.Publications}}</h2>
           {{range .Publications}}

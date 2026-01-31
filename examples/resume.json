@@ -170,5 +170,15 @@
       "name": "Rock Climbing",
       "keywords": ["Bouldering", "Sport"]
     }
+  ],
+  "references": [
+    {
+      "name": "John Doe",
+      "reference": "Jane is an exceptional engineer with great leadership skills. Available upon request."
+    },
+    {
+      "name": "Sarah Johnson",
+      "reference": "Working with Jane was a pleasure. Highly recommended for any technical role."
+    }
   ]
 }

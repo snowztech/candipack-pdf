@@ -88,3 +88,24 @@ func (p *HTMLParser) ParseCoverLetter(templateName string, coverLetter models.Co
 
 	return tempFile.Name(), nil
 }
+
+func (p *HTMLParser) ParseResumeHTML(templateName string, resume models.Resume, labels map[string]string) (string, error) {
+	templatePath := filepath.Join(templatesPath, "cv", templateName, "template.html")
+
+	tmpl, err := template.ParseFiles(templatePath)
+	if err != nil {
+		return "", err
+	}
+
+	data := resumeTemplateData{
+		Resume: resume,
+		Labels: labels,
+	}
+
+	var buf bytes.Buffer
+	if err := tmpl.Execute(&buf, data); err != nil {
+		return "", fmt.Errorf("failed to execute template: %w", err)
+	}
+
+	return buf.String(), nil
+}

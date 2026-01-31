@@ -8,6 +8,8 @@ type Resume struct {
 	Publications []Publications `json:"publications"`
 	Education    []Education    `json:"education"`
 	Certificates []Certificate  `json:"certificates"`
+	Awards       []Award        `json:"awards"`
+	References   []Reference    `json:"references"`
 	Skills       []Skill        `json:"skills"`
 	SoftSkills   []Skill        `json:"softSkills"`
 	Languages    []Language     `json:"languages"`
@@ -16,18 +18,22 @@ type Resume struct {
 }
 
 type Basics struct {
-	Name     string    `json:"name"`
-	Label    string    `json:"label"`
-	Image    string    `json:"image"`
-	Email    string    `json:"email"`
-	Phone    string    `json:"phone"`
-	Summary  string    `json:"summary"`
-	Location Location  `json:"location"`
-	URL      string    `json:"url"`
-	Profiles []Profile `json:"profiles"`
+	Name        string    `json:"name"`
+	Label       string    `json:"label"`
+	Image       string    `json:"image"`
+	Email       string    `json:"email"`
+	Phone       string    `json:"phone"`
+	Summary     string    `json:"summary"`
+	BirthDate   string    `json:"birthDate"`
+	Nationality string    `json:"nationality"`
+	Location    Location  `json:"location"`
+	URL         string    `json:"url"`
+	Profiles    []Profile `json:"profiles"`
 }
 
 type Location struct {
+	Address     string `json:"address"`
+	PostalCode  string `json:"postalCode"`
 	City        string `json:"city"`
 	CountryCode string `json:"countryCode"`
 	Region      string `json:"region"`
@@ -99,6 +105,18 @@ type Certificate struct {
 	URL    string `json:"url"`
 }
 
+type Award struct {
+	Title   string `json:"title"`
+	Date    string `json:"date"`
+	Awarder string `json:"awarder"`
+	Summary string `json:"summary"`
+}
+
+type Reference struct {
+	Name      string `json:"name"`
+	Reference string `json:"reference"`
+}
+
 type Skill struct {
 	Name     string   `json:"name"`
 	Level    string   `json:"level"`
@@ -116,6 +134,9 @@ type Interest struct {
 }
 
 type Meta struct {
-	Template string `json:"template"`
-	Lang     string `json:"lang"`
+	Template     string `json:"template"`
+	Lang         string `json:"lang"`
+	Availability string `json:"availability"`
+	ActivityRate string `json:"activityRate"`
+	WorkPermit   string `json:"workPermit"`
 }
