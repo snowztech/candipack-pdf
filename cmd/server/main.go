@@ -6,24 +6,31 @@ import (
 	"candipack-pdf/internal/middleware"
 	"fmt"
 	"log"
-	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	config := configs.Load()
-	mux := http.NewServeMux()
+	router := gin.Default()
+
+	// Apply middleware
+	router.Use(middleware.CORS())
+	if config.APIKey != "" {
+		router.Use(middleware.APIKey(config.APIKey))
+	}
+
+	// Initialize handlers
+	h := handlers.New()
 
 	// Routes
-	mux.HandleFunc("POST /resume", handlers.HandleResume)
-	mux.HandleFunc("POST /cover-letter", handlers.HandleCoverLetter)
-	mux.HandleFunc("GET /templates", handlers.HandleTemplates)
-	mux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("ok"))
+	router.POST("/resume", h.HandleResume())
+	router.POST("/cover-letter", h.HandleCoverLetter())
+	router.GET("/templates", h.HandleTemplates())
+	router.GET("/up", func(c *gin.Context) {
+		c.String(200, "ok")
 	})
 
-	// Middleware
-	handler := middleware.CORS(middleware.APIKey(mux, config.APIKey))
-
 	log.Printf("Server running on :%d", config.Port)
-	log.Fatal(http.ListenAndServe(":"+fmt.Sprint(config.Port), handler))
+	log.Fatal(router.Run(":" + fmt.Sprint(config.Port)))
 }

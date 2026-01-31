@@ -2,28 +2,31 @@ package middleware
 
 import (
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-func APIKey(next http.Handler, key string) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if key != "" && r.Header.Get("X-API-Key") != key {
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+func APIKey(key string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if key != "" && c.GetHeader("X-API-Key") != key {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			c.Abort()
 			return
 		}
-		next.ServeHTTP(w, r)
-	})
+		c.Next()
+	}
 }
 
-func CORS(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, X-API-Key")
+func CORS() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, X-API-Key")
 
-		if r.Method == "OPTIONS" {
-			w.WriteHeader(http.StatusOK)
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusOK)
 			return
 		}
-		next.ServeHTTP(w, r)
-	})
+		c.Next()
+	}
 }

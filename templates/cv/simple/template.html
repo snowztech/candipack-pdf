@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="{{.Meta.Lang}}">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        font-family: "Inter", sans-serif;
+        font-size: 10pt;
+        line-height: 1.5;
+        color: #1a1a1a;
+      }
+      .cv {
+        padding: 40px 50px;
+      }
+
+      /* Header */
+      .header {
+        border-bottom: 2px solid #1a1a1a;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+      }
+      .name {
+        font-size: 28pt;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .job-title {
+        font-size: 14pt;
+        color: #666;
+        margin-bottom: 12px;
+      }
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 9pt;
+        color: #444;
+      }
+      .contact-row span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      /* Sections */
+      section {
+        margin-bottom: 20px;
+      }
+      h2 {
+        font-size: 11pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      /* Summary */
+      .summary {
+        font-size: 10pt;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Experience */
+      .exp-item {
+        margin-bottom: 14px;
+      }
+      .exp-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2px;
+      }
+      .exp-title {
+        font-weight: 600;
+      }
+      .exp-period {
+        color: #666;
+        font-size: 9pt;
+      }
+      .exp-company {
+        color: #666;
+        font-size: 9pt;
+        margin-bottom: 4px;
+      }
+      .exp-missions {
+        padding-left: 18px;
+        font-size: 9pt;
+        color: #444;
+      }
+      .exp-missions li {
+        margin-bottom: 2px;
+      }
+
+      /* Education */
+      .edu-item {
+        margin-bottom: 6px;
+      }
+      .edu-degree {
+        font-weight: 500;
+      }
+
+      /* Skills & Languages */
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag {
+        background: #f3f4f6;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 9pt;
+      }
+      .lang-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .lang-item {
+        font-size: 9pt;
+      }
+      .lang-name {
+        font-weight: 500;
+      }
+      .lang-level {
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cv">
+      <header class="header">
+        <h1 class="name">{{.Basics.Name}}</h1>
+        {{if .Basics.Label}}
+        <p class="job-title">{{.Basics.Label}}</p>
+        {{end}}
+        <div class="contact-row">
+          <span>{{.Basics.Email}}</span>
+          <span>{{.Basics.Phone}}</span>
+          <span>{{.Basics.Location.City}}</span>
+          {{if .Basics.URL}}
+          <span>{{.Basics.URL}}</span>
+          {{end}}
+        </div>
+      </header>
+
+      {{if .Basics.Summary}}
+      <section>
+        <h2>{{.Labels.Profile}}</h2>
+        <p class="summary">{{.Basics.Summary}}</p>
+      </section>
+      {{end}}
+
+      {{if .Work}}
+      <section>
+        <h2>{{.Labels.Experiences}}</h2>
+        {{range .Work}}
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">{{.Position}}</span>
+            <span class="exp-period">{{.StartDate}} - {{.EndDate}}</span>
+          </div>
+          <p class="exp-company">{{.Company}}, {{.Location}}</p>
+          <ul class="exp-missions">
+            {{range .Highlights}}
+            <li>{{.}}</li>
+            {{end}}
+          </ul>
+        </div>
+        {{end}}
+      </section>
+      {{end}}
+
+      {{if .Education}}
+      <section>
+        <h2>{{.Labels.Education}}</h2>
+        {{range .Education}}
+        <div class="edu-item">
+          <span class="edu-degree">{{.StudyType}} {{.Area}}</span> – {{.Institution}} ({{.StartDate}} - {{.EndDate}})
+        </div>
+        {{end}}
+      </section>
+      {{end}}
+
+      {{if .Skills}}
+      <section>
+        <h2>{{.Labels.Skills}}</h2>
+        <div class="tags">
+          {{range .Skills}}
+          <span class="tag">{{.Name}}</span>
+          {{end}}
+        </div>
+      </section>
+      {{end}}
+
+      {{if .SoftSkills}}
+      <section>
+        <h2>{{.Labels.SoftSkills}}</h2>
+        <div class="tags">
+          {{range .SoftSkills}}
+          <span class="tag">{{.Name}}</span>
+          {{end}}
+        </div>
+      </section>
+      {{end}}
+
+      {{if .Languages}}
+      <section>
+        <h2>{{.Labels.Languages}}</h2>
+        <div class="lang-grid">
+          {{range .Languages}}
+          <div class="lang-item">
+            <span class="lang-name">{{.Language}}</span>
+            <span class="lang-level"> – {{.Fluency}}</span>
+          </div>
+          {{end}}
+        </div>
+      </section>
+      {{end}}
+
+      {{if .Certificates}}
+      <section>
+        <h2>{{.Labels.Certificates}}</h2>
+        {{range .Certificates}}
+        <div class="edu-item">
+          <span class="edu-degree">{{.Title}}</span> – {{.Issuer}} ({{.Date}})
+        </div>
+        {{end}}
+      </section>
+      {{end}}
+
+      {{if .Projects}}
+      <section>
+        <h2>{{.Labels.Projects}}</h2>
+        {{range .Projects}}
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-title">{{.Name}}</span>
+            {{if .URL}}<span class="exp-period">{{.URL}}</span>{{end}}
+          </div>
+          <p class="exp-company">{{.Description}}</p>
+        </div>
+        {{end}}
+      </section>
+      {{end}}
+    </div>
+  </body>
+</html>

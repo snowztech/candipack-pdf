@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "template": "classic",
+    "lang": "en"
+  },
+  "sender": {
+    "name": "Jane Smith",
+    "address": "123 Main Street, San Francisco, CA 94102",
+    "phone": "+1 555-123-4567",
+    "email": "jane.smith@example.com"
+  },
+  "recipient": {
+    "company": "Tech Innovations Inc.",
+    "address": "456 Market Street, San Francisco, CA 94105"
+  },
+  "date": "January 31, 2026",
+  "subject": "Application for Senior Software Engineer Position",
+  "salutation": "Dear Hiring Manager,",
+  "paragraphs": [
+    "I am writing to express my strong interest in the Senior Software Engineer position at Tech Innovations Inc. With over 5 years of experience in building scalable web applications and leading development teams, I believe I would be an excellent addition to your engineering organization.",
+    "At my current role at TechCorp Inc., I have successfully led the migration from a monolithic architecture to microservices, resulting in a 40% reduction in API latency. I have also mentored junior engineers and contributed to open-source projects in the Go ecosystem. My experience aligns well with your company's focus on building high-performance distributed systems.",
+    "I am particularly drawn to Tech Innovations Inc. because of your commitment to innovation and your recent work in AI-powered applications. I am eager to bring my expertise in Go, TypeScript, and cloud infrastructure to help drive your next phase of growth.",
+    "I would welcome the opportunity to discuss how my background and skills can contribute to your team's success. Thank you for considering my application."
+  ],
+  "closing": "Sincerely,",
+  "signature": "Jane Smith"
+}

@@ -3,8 +3,8 @@ package configs
 import "github.com/spf13/viper"
 
 type Config struct {
-	Port    int
-	APIKey	string
+	Port   int
+	APIKey string
 }
 
 func Load() Config {
