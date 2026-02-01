@@ -1,28 +1,14 @@
 package handlers
 
 import (
-	"candipack-pdf/internal/generator"
 	"candipack-pdf/internal/lang"
 	"candipack-pdf/internal/models"
-	"candipack-pdf/internal/parser"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 )
-
-type Handler struct {
-	parser    *parser.HTMLParser
-	generator *generator.Generator
-}
-
-func New() *Handler {
-	return &Handler{
-		parser:    parser.NewHTMLParser(),
-		generator: generator.NewGenerator(),
-	}
-}
 
 func (h *Handler) HandleResume() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -75,57 +61,6 @@ func (h *Handler) HandleResume() gin.HandlerFunc {
 		}
 
 		c.Data(http.StatusOK, "application/pdf", pdf)
-	}
-}
-
-func (h *Handler) HandleCoverLetter() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		var coverLetterData models.CoverLetter
-		if err := c.ShouldBindJSON(&coverLetterData); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload: " + err.Error()})
-			return
-		}
-
-		if coverLetterData.Meta.Template == "" {
-			coverLetterData.Meta.Template = "classic"
-		}
-		if coverLetterData.Meta.Lang == "" {
-			coverLetterData.Meta.Lang = "en"
-		}
-
-		htmlFile, err := h.parser.ParseCoverLetter(coverLetterData.Meta.Template, coverLetterData)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse template: " + err.Error()})
-			return
-		}
-		defer func() {
-			if err := os.Remove(htmlFile); err != nil {
-				log.Printf("Warning: failed to remove temp file: %v", err)
-			}
-		}()
-
-		pdf, err := h.generator.GeneratePDF(htmlFile)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate PDF: " + err.Error()})
-			return
-		}
-
-		c.Data(http.StatusOK, "application/pdf", pdf)
-	}
-}
-
-func (h *Handler) HandleTemplates() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		templates := map[string]interface{}{
-			"cv": []map[string]string{
-				{"id": "professional", "name": "Professional", "description": "2-column layout with sidebar"},
-				{"id": "simple", "name": "Simple", "description": "1-column minimalist layout"},
-			},
-			"coverLetter": []map[string]string{
-				{"id": "classic", "name": "Classic", "description": "Traditional letter format"},
-			},
-		}
-		c.JSON(http.StatusOK, templates)
 	}
 }
 

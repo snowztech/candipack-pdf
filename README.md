@@ -49,12 +49,14 @@ curl http://localhost:9000/health
 
 ## API Endpoints
 
-| Method | Endpoint        | Description               |
-| ------ | --------------- | ------------------------- |
-| `POST` | `/resume`       | Generate PDF resume       |
-| `POST` | `/cover-letter` | Generate PDF cover letter |
-| `GET`  | `/templates`    | List available templates  |
-| `GET`  | `/health`       | Health check              |
+| Method | Endpoint             | Description                |
+| ------ | -------------------- | -------------------------- |
+| `POST` | `/resume`            | Generate PDF resume        |
+| `POST` | `/resume/html`       | Generate HTML resume       |
+| `POST` | `/cover-letter`      | Generate PDF cover letter  |
+| `POST` | `/cover-letter/html` | Generate HTML cover letter |
+| `GET`  | `/templates`         | List available templates   |
+| `GET`  | `/health`            | Health check               |
 
 ### Headers
 
@@ -106,6 +108,8 @@ The API accepts JSON following the [JSON Resume](https://jsonresume.org/) schema
 
 ### Resume Request Example
 
+See [example](examples/resume.json)
+
 ```json
 {
   "meta": {
@@ -131,6 +135,8 @@ The API accepts JSON following the [JSON Resume](https://jsonresume.org/) schema
 ```
 
 ### Cover Letter Request Example
+
+See [example](examples/cover-letter.json)
 
 ```json
 {

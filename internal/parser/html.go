@@ -109,3 +109,19 @@ func (p *HTMLParser) ParseResumeHTML(templateName string, resume models.Resume, 
 
 	return buf.String(), nil
 }
+
+func (p *HTMLParser) ParseCoverLetterHTML(templateName string, coverLetter models.CoverLetter) (string, error) {
+	templatePath := filepath.Join(templatesPath, "cover-letter", templateName, "template.html")
+
+	tmpl, err := template.ParseFiles(templatePath)
+	if err != nil {
+		return "", fmt.Errorf("failed to parse template: %w", err)
+	}
+
+	var buf bytes.Buffer
+	if err := tmpl.Execute(&buf, coverLetter); err != nil {
+		return "", fmt.Errorf("failed to execute template: %w", err)
+	}
+
+	return buf.String(), nil
+}
