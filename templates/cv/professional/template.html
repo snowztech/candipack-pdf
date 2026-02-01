@@ -30,12 +30,19 @@
         height: 100%;
       }
 
-      /* Sidebar - Dark Navy */
+      /* Sidebar - Professional Blue */
       .sidebar {
         width: 38%;
-        background: #1a1a2e;
+        background: #2c3e50;
         color: white;
         padding: 30px 24px;
+      }
+      .sidebar a {
+        color: white;
+        text-decoration: none;
+      }
+      .sidebar a:hover {
+        text-decoration: underline;
       }
       .photo {
         width: 140px;
@@ -200,11 +207,19 @@
 
         <section>
           <h2>{{.Labels.Socials}}</h2>
-          <p>{{.Basics.Phone}}</p>
-          <p>{{.Basics.Email}}</p>
+          <p><a href="tel:{{.Basics.Phone}}">{{.Basics.Phone}}</a></p>
+          <p><a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a></p>
           {{if .Basics.URL}}
-          <p>{{.Basics.URL}}</p>
-          {{end}} {{if .Basics.Location.Address}}
+          <p><a href="{{.Basics.URL}}">{{.Basics.URL}}</a></p>
+          {{end}}
+          {{if .Basics.Profiles}}
+          <div style="margin-top: 8px">
+            {{range .Basics.Profiles}}
+            <p><a href="{{.URL}}">{{.Network}}: {{.Username}}</a></p>
+            {{end}}
+          </div>
+          {{end}}
+          {{if .Basics.Location.Address}}
           <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
           {{end}} {{if .Basics.Location.PostalCode}}
           <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
@@ -212,8 +227,11 @@
           <p style="margin-top: 8px">{{.Basics.Location.City}}</p>
           {{end}} {{if .Basics.Location.Region}}
           <p>{{.Basics.Location.Region}}</p>
-          {{end}} {{if .Basics.Nationality}}
+          {{end}}           {{if .Basics.Nationality}}
           <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
+          {{end}}
+          {{if .Meta.WorkPermit}}
+          <p style="margin-top: 4px">{{.Meta.WorkPermit}}</p>
           {{end}}
         </section>
 
@@ -247,16 +265,15 @@
         {{end}}
 
         <!-- Informations Complémentaires -->
-        {{if or .Meta.ActivityRate .Meta.Availability .Meta.WorkPermit}}
+        {{if or .Meta.ActivityRate .Meta.Availability}}
         <section>
           <h2>{{.Labels.AdditionalInfo}}</h2>
           <div class="additional-info">
             {{if .Meta.ActivityRate}}
             <p>Taux souhaité: {{.Meta.ActivityRate}}</p>
-            {{end}} {{if .Meta.Availability}}
+            {{end}}
+            {{if .Meta.Availability}}
             <p>Disponibilité: {{.Meta.Availability}}</p>
-            {{end}} {{if .Meta.WorkPermit}}
-            <p>Permis de travail: {{.Meta.WorkPermit}}</p>
             {{end}}
           </div>
         </section>
