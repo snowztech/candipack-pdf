@@ -7,6 +7,9 @@
       rel="stylesheet"
     />
     <style>
+      :root {
+        --accent-color: {{if .Meta.AccentColor}}{{.Meta.AccentColor}}{{else}}#1a365d{{end}};
+      }
       @page {
         size: A4;
         margin: 0;
@@ -44,7 +47,7 @@
         font-weight: 700;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: #1a365d;
+        color: var(--accent-color);
         margin-bottom: 6px;
       }
       .sender-contact {
@@ -78,7 +81,7 @@
       .subject {
         font-size: 10.5pt;
         font-weight: 700;
-        color: #1a365d;
+        color: var(--accent-color);
         margin-bottom: 24px;
         text-transform: uppercase;
       }

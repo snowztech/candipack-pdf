@@ -14,8 +14,9 @@ type CoverLetter struct {
 }
 
 type CoverLetterMeta struct {
-	Template string `json:"template"`
-	Lang     string `json:"lang"`
+	Template    string `json:"template"`
+	Lang        string `json:"lang"`
+	AccentColor string `json:"accentColor"`
 }
 
 type Sender struct {
