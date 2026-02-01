@@ -10,24 +10,33 @@
       @page {
         size: A4;
         margin: 0;
+        padding: 0;
       }
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
+      html {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
       html,
       body {
         width: 210mm;
-        height: 297mm;
+        min-height: 297mm;
         font-family: "Open Sans", sans-serif;
         font-size: 11pt;
         line-height: 1.4;
         color: #333;
+        background: #fff;
+        overflow: hidden;
       }
       .container {
         display: flex;
-        height: 100%;
+        min-height: 297mm;
+        width: 100%;
+        overflow: hidden;
       }
 
       /* Sidebar - Professional Blue */
@@ -36,6 +45,8 @@
         background: #2c3e50;
         color: white;
         padding: 30px 24px;
+        min-height: 297mm;
+        flex-shrink: 0;
       }
       .sidebar a {
         color: white;
@@ -102,6 +113,9 @@
       .main {
         width: 62%;
         padding: 30px 32px;
+        min-height: 297mm;
+        background: #fff;
+        flex-grow: 1;
       }
       .header {
         text-align: center;
@@ -211,15 +225,13 @@
           <p><a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a></p>
           {{if .Basics.URL}}
           <p><a href="{{.Basics.URL}}">{{.Basics.URL}}</a></p>
-          {{end}}
-          {{if .Basics.Profiles}}
+          {{end}} {{if .Basics.Profiles}}
           <div style="margin-top: 8px">
             {{range .Basics.Profiles}}
             <p><a href="{{.URL}}">{{.Network}}: {{.Username}}</a></p>
             {{end}}
           </div>
-          {{end}}
-          {{if .Basics.Location.Address}}
+          {{end}} {{if .Basics.Location.Address}}
           <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
           {{end}} {{if .Basics.Location.PostalCode}}
           <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
@@ -227,10 +239,9 @@
           <p style="margin-top: 8px">{{.Basics.Location.City}}</p>
           {{end}} {{if .Basics.Location.Region}}
           <p>{{.Basics.Location.Region}}</p>
-          {{end}}           {{if .Basics.Nationality}}
+          {{end}} {{if .Basics.Nationality}}
           <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
-          {{end}}
-          {{if .Meta.WorkPermit}}
+          {{end}} {{if .Meta.WorkPermit}}
           <p style="margin-top: 4px">{{.Meta.WorkPermit}}</p>
           {{end}}
         </section>
@@ -271,8 +282,7 @@
           <div class="additional-info">
             {{if .Meta.ActivityRate}}
             <p>Taux souhaité: {{.Meta.ActivityRate}}</p>
-            {{end}}
-            {{if .Meta.Availability}}
+            {{end}} {{if .Meta.Availability}}
             <p>Disponibilité: {{.Meta.Availability}}</p>
             {{end}}
           </div>

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"candipack-pdf/internal/lang"
 	"candipack-pdf/internal/models"
 	"log"
 	"net/http"
@@ -24,7 +25,11 @@ func (h *Handler) HandleCoverLetter() gin.HandlerFunc {
 			coverLetterData.Meta.Lang = "en"
 		}
 
-		htmlFile, err := h.parser.ParseCoverLetter(coverLetterData.Meta.Template, coverLetterData)
+		labels := map[string]string{
+			"Subject": lang.Translate(coverLetterData.Meta.Lang, "Subject"),
+		}
+
+		htmlFile, err := h.parser.ParseCoverLetter(coverLetterData.Meta.Template, coverLetterData, labels)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse template: " + err.Error()})
 			return
@@ -60,7 +65,11 @@ func (h *Handler) HandleCoverLetterHTML() gin.HandlerFunc {
 			coverLetterData.Meta.Lang = "en"
 		}
 
-		html, err := h.parser.ParseCoverLetterHTML(coverLetterData.Meta.Template, coverLetterData)
+		labels := map[string]string{
+			"Subject": lang.Translate(coverLetterData.Meta.Lang, "Subject"),
+		}
+
+		html, err := h.parser.ParseCoverLetterHTML(coverLetterData.Meta.Template, coverLetterData, labels)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse template: " + err.Error()})
 			return

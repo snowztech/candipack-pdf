@@ -3,105 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <link
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       @page {
         size: A4;
         margin: 0;
+        padding: 0;
       }
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
+      html {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
       html,
       body {
         width: 210mm;
-        height: 297mm;
-        font-family: "EB Garamond", Georgia, serif;
-        font-size: 12pt;
-        line-height: 1.7;
-        color: #1a1a1a;
+        min-height: 297mm;
+        font-family: "Open Sans", sans-serif;
+        font-size: 10.5pt;
+        line-height: 1.6;
+        color: #2d3748;
+        background: #fff;
       }
       .letter {
-        padding: 50px 60px;
+        padding: 50px 55px;
       }
 
-      .header {
-        text-align: center;
-        margin-bottom: 40px;
+      /* Sender Header */
+      .sender {
+        margin-bottom: 32px;
       }
       .sender-name {
-        font-size: 22pt;
-        font-weight: 400;
-        letter-spacing: 6px;
+        font-size: 13pt;
+        font-weight: 700;
+        letter-spacing: 2px;
         text-transform: uppercase;
-        margin-bottom: 10px;
+        color: #1a365d;
+        margin-bottom: 6px;
       }
       .sender-contact {
         font-size: 10pt;
-        font-style: italic;
-        color: #555;
+        color: #4a5568;
+        line-height: 1.5;
+      }
+      .sender-contact a {
+        color: #4a5568;
+        text-decoration: none;
       }
 
-      .date {
-        text-align: right;
-        font-variant: small-caps;
-        margin-bottom: 30px;
+      /* Date & Location */
+      .meta {
+        margin-bottom: 8px;
+        font-size: 10pt;
+        color: #4a5568;
+        text-transform: uppercase;
       }
 
+      /* Recipient */
       .recipient {
         margin-bottom: 24px;
-        font-size: 11pt;
-      }
-      .subject {
+        font-size: 10pt;
+        color: #4a5568;
+        text-transform: uppercase;
         font-weight: 600;
-        margin-bottom: 20px;
       }
+
+      /* Subject */
+      .subject {
+        font-size: 10.5pt;
+        font-weight: 700;
+        color: #1a365d;
+        margin-bottom: 24px;
+        text-transform: uppercase;
+      }
+
+      /* Body */
       .salutation {
         margin-bottom: 16px;
       }
-
       .paragraph {
         text-align: justify;
-        text-indent: 2em;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
       }
-
       .closing {
-        margin-top: 28px;
-        margin-bottom: 50px;
+        margin-top: 24px;
+        margin-bottom: 8px;
       }
       .signature {
-        font-weight: 600;
+        margin-top: 24px;
+        font-weight: 500;
       }
     </style>
   </head>
   <body>
     <div class="letter">
-      <header class="header">
+      <header class="sender">
         <h1 class="sender-name">{{.Sender.Name}}</h1>
-        <p class="sender-contact">
-          {{.Sender.Address}}<br />
-          {{.Sender.Phone}} · {{.Sender.Email}}
-        </p>
+        <div class="sender-contact">
+          {{if .Sender.Email}}<a href="mailto:{{.Sender.Email}}">{{.Sender.Email}}</a><br />{{end}}
+          {{if .Sender.Phone}}<a href="tel:{{.Sender.Phone}}">{{.Sender.Phone}}</a><br />{{end}}
+          {{if .Sender.Address}}{{.Sender.Address}}<br />{{end}}
+          {{if .Sender.City}}{{.Sender.City}}{{end}}
+        </div>
       </header>
 
-      <p class="date">{{.Date}}</p>
+      <p class="meta">{{.Location}}{{if .Date}}, {{.Date}}{{end}}</p>
 
-      {{if or .Recipient.Company .Recipient.Address}}
-      <div class="recipient">
-        {{if .Recipient.Company}}
-        <p>{{.Recipient.Company}}</p>
-        {{end}} {{if .Recipient.Address}}
-        <p>{{.Recipient.Address}}</p>
-        {{end}}
-      </div>
+      {{if .Recipient.Company}}
+      <p class="recipient">{{.Recipient.Company}}</p>
       {{end}}
 
-      <p class="subject">{{.Subject}}</p>
+      <p class="subject">{{.Labels.Subject}} : {{.Subject}}</p>
+
       <p class="salutation">{{.Salutation}}</p>
 
       {{range .Paragraphs}}

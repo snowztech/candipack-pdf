@@ -24,6 +24,11 @@ type resumeTemplateData struct {
 	Labels map[string]string
 }
 
+type coverLetterTemplateData struct {
+	models.CoverLetter
+	Labels map[string]string
+}
+
 func (p *HTMLParser) ParseResume(templateName string, resume models.Resume, labels map[string]string) (string, error) {
 	templatePath := filepath.Join(templatesPath, "cv", templateName, "template.html")
 
@@ -59,7 +64,7 @@ func (p *HTMLParser) ParseResume(templateName string, resume models.Resume, labe
 	return tempFile.Name(), nil
 }
 
-func (p *HTMLParser) ParseCoverLetter(templateName string, coverLetter models.CoverLetter) (string, error) {
+func (p *HTMLParser) ParseCoverLetter(templateName string, coverLetter models.CoverLetter, labels map[string]string) (string, error) {
 	templatePath := filepath.Join(templatesPath, "cover-letter", templateName, "template.html")
 
 	tmpl, err := template.ParseFiles(templatePath)
@@ -67,8 +72,13 @@ func (p *HTMLParser) ParseCoverLetter(templateName string, coverLetter models.Co
 		return "", fmt.Errorf("failed to parse template: %w", err)
 	}
 
+	data := coverLetterTemplateData{
+		CoverLetter: coverLetter,
+		Labels:      labels,
+	}
+
 	var buf bytes.Buffer
-	if err := tmpl.Execute(&buf, coverLetter); err != nil {
+	if err := tmpl.Execute(&buf, data); err != nil {
 		return "", fmt.Errorf("failed to execute template: %w", err)
 	}
 
@@ -110,7 +120,7 @@ func (p *HTMLParser) ParseResumeHTML(templateName string, resume models.Resume, 
 	return buf.String(), nil
 }
 
-func (p *HTMLParser) ParseCoverLetterHTML(templateName string, coverLetter models.CoverLetter) (string, error) {
+func (p *HTMLParser) ParseCoverLetterHTML(templateName string, coverLetter models.CoverLetter, labels map[string]string) (string, error) {
 	templatePath := filepath.Join(templatesPath, "cover-letter", templateName, "template.html")
 
 	tmpl, err := template.ParseFiles(templatePath)
@@ -118,8 +128,13 @@ func (p *HTMLParser) ParseCoverLetterHTML(templateName string, coverLetter model
 		return "", fmt.Errorf("failed to parse template: %w", err)
 	}
 
+	data := coverLetterTemplateData{
+		CoverLetter: coverLetter,
+		Labels:      labels,
+	}
+
 	var buf bytes.Buffer
-	if err := tmpl.Execute(&buf, coverLetter); err != nil {
+	if err := tmpl.Execute(&buf, data); err != nil {
 		return "", fmt.Errorf("failed to execute template: %w", err)
 	}
 

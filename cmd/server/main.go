@@ -29,6 +29,7 @@ func main() {
 	apirouter.POST("/resume", h.HandleResume())
 	apirouter.POST("/resume/html", h.HandleResumeHTML())
 	apirouter.POST("/cover-letter", h.HandleCoverLetter())
+	apirouter.POST("/cover-letter/html", h.HandleCoverLetterHTML())
 	router.GET("/templates", h.HandleTemplates())
 	router.GET("/up", func(c *gin.Context) {
 		c.String(200, "ok")

@@ -35,9 +35,13 @@ func (g *Generator) GeneratePDF(htmlFile string) ([]byte, error) {
 		chromedp.WaitReady("body"),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			data, _, err := page.PrintToPDF().
-				WithMarginTop(0.4).
-				WithMarginBottom(0.4).
+				WithMarginTop(0).
+				WithMarginBottom(0).
+				WithMarginLeft(0).
+				WithMarginRight(0).
 				WithPrintBackground(true).
+				WithPaperWidth(8.27).
+				WithPaperHeight(11.69).
 				Do(ctx)
 			if err != nil {
 				return err
