@@ -18,6 +18,7 @@ var translations = map[string]map[string]string{
 		"AdditionalInfo": "Additional Information",
 		"References":     "References",
 		"Subject":        "Subject",
+		"Present":        "Present",
 	},
 	"fr": {
 		"Education":      "Formation",
@@ -36,6 +37,7 @@ var translations = map[string]map[string]string{
 		"AdditionalInfo": "Informations Complémentaires",
 		"References":     "Références",
 		"Subject":        "Objet",
+		"Present":        "Présent",
 	},
 }
 

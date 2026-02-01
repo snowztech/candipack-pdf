@@ -228,7 +228,7 @@
           <p><a href="tel:{{.Basics.Phone}}">{{.Basics.Phone}}</a></p>
           <p><a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a></p>
           {{if .Basics.URL}}
-          <p><a href="{{.Basics.URL}}">{{.Basics.URL}}</a></p>
+          <p><a href="{{.Basics.URL}}">{{trimURLPrefix .Basics.URL}}</a></p>
           {{end}} {{if .Basics.Profiles}}
           <div style="margin-top: 8px">
             {{range .Basics.Profiles}}
@@ -239,10 +239,8 @@
           <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
           {{end}} {{if .Basics.Location.PostalCode}}
           <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
-          {{else}}
-          <p style="margin-top: 8px">{{.Basics.Location.City}}</p>
-          {{end}} {{if .Basics.Location.Region}}
-          <p>{{.Basics.Location.Region}}</p>
+          {{else if .Basics.Location.City}}
+          <p>{{displayLocation .Basics.Location}}</p>
           {{end}} {{if .Basics.Nationality}}
           <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
           {{end}} {{if .Meta.WorkPermit}}
@@ -340,7 +338,7 @@
               <div>
                 <p class="exp-title">{{.Position}}</p>
                 <p class="exp-company">
-                  {{.Company}} – {{.Location}} ({{.StartDate}} - {{.EndDate}})
+                  {{.Company}} – {{.Location}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}} - {{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}})
                 </p>
               </div>
             </div>
@@ -395,7 +393,7 @@
           <div class="experience">
             <p class="exp-title">{{.Position}}</p>
             <p class="exp-company">
-              {{.Organization}} ({{.StartDate}} - {{.EndDate}})
+              {{.Organization}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}} - {{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}})
             </p>
             <ul class="exp-missions">
               {{range .Highlights}}
