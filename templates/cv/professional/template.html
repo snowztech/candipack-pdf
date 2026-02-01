@@ -7,6 +7,10 @@
       rel="stylesheet"
     />
     <style>
+      :root {
+        --primary-color: {{if .Meta.PrimaryColor}}{{.Meta.PrimaryColor}}{{else}}#2c3e50{{end}};
+        --accent-color: {{if .Meta.AccentColor}}{{.Meta.AccentColor}}{{else}}#e07c4c{{end}};
+      }
       @page {
         size: A4;
         margin: 0;
@@ -39,10 +43,10 @@
         overflow: hidden;
       }
 
-      /* Sidebar - Professional Blue */
+      /* Sidebar */
       .sidebar {
         width: 38%;
-        background: #2c3e50;
+        background: var(--primary-color);
         color: white;
         padding: 30px 24px;
         min-height: 297mm;
@@ -124,7 +128,7 @@
       .name {
         font-size: 26pt;
         font-weight: 400;
-        color: #2d3e50;
+        color: var(--primary-color);
         margin-bottom: 4px;
       }
       .job-title {
@@ -142,9 +146,9 @@
       .main h2 {
         font-size: 13pt;
         font-weight: 600;
-        color: #2d3e50;
+        color: var(--primary-color);
         padding-bottom: 6px;
-        border-bottom: 2px solid #2d3e50;
+        border-bottom: 2px solid var(--primary-color);
         margin-bottom: 14px;
       }
       .main section {
@@ -184,11 +188,11 @@
       .exp-title {
         font-size: 12pt;
         font-weight: 600;
-        color: #2d3e50;
+        color: var(--primary-color);
       }
       .exp-company {
         font-size: 10pt;
-        color: #e07c4c;
+        color: var(--accent-color);
         font-weight: 500;
       }
       .exp-missions {

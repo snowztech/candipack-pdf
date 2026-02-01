@@ -139,4 +139,6 @@ type Meta struct {
 	Availability string `json:"availability"`
 	ActivityRate string `json:"activityRate"`
 	WorkPermit   string `json:"workPermit"`
+	PrimaryColor string `json:"primaryColor"`
+	AccentColor  string `json:"accentColor"`
 }

@@ -106,9 +106,11 @@
       <header class="sender">
         <h1 class="sender-name">{{.Sender.Name}}</h1>
         <div class="sender-contact">
-          {{if .Sender.Email}}<a href="mailto:{{.Sender.Email}}">{{.Sender.Email}}</a><br />{{end}}
-          {{if .Sender.Phone}}<a href="tel:{{.Sender.Phone}}">{{.Sender.Phone}}</a><br />{{end}}
-          {{if .Sender.Address}}{{.Sender.Address}}<br />{{end}}
+          {{if .Sender.Email}}<a href="mailto:{{.Sender.Email}}"
+            >{{.Sender.Email}}</a
+          ><br />{{end}} {{if .Sender.Phone}}<a href="tel:{{.Sender.Phone}}"
+            >{{.Sender.Phone}}</a
+          ><br />{{end}} {{if .Sender.Address}}{{.Sender.Address}}<br />{{end}}
           {{if .Sender.City}}{{.Sender.City}}{{end}}
         </div>
       </header>
