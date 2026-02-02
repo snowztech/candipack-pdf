@@ -15,6 +15,7 @@ var funcs = template.FuncMap{
 	"formatDate":      formatDate,
 	"trimURLPrefix":   trimURLPrefix,
 	"split":           split,
+	"safeURL":         safeURL,
 }
 
 func displayLocation(location models.Location) string {
@@ -71,4 +72,8 @@ func split(s string, sep string) []string {
 		return []string{}
 	}
 	return strings.Split(s, sep)
+}
+
+func safeURL(url string) template.URL {
+	return template.URL(url)
 }

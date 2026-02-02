@@ -75,6 +75,7 @@ type Project struct {
 	Description  string   `json:"description"`
 	Highlights   []string `json:"highlights"`
 	URL          string   `json:"url"`
+	Logo         *string  `json:"logo,omitempty"`
 	StackDetails *string  `json:"stackDetails,omitempty"`
 }
 

@@ -161,38 +161,42 @@
         position: relative;
         padding-left: 16px;
       }
-      .experience::before {
+      .experience.has-logo {
+        padding-left: 0;
+      }
+      .experience:not(.has-logo)::before {
         content: "";
         position: absolute;
         left: 0;
         top: 6px;
         width: 8px;
         height: 8px;
-        border: 2px solid #6b7280;
+        border: 2px solid var(--primary-color);
         border-radius: 50%;
         background: white;
       }
-      .exp-header {
+      .exp-title {
+        font-size: 11pt;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 2px;
+      }
+      .exp-company {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 6px;
+        font-size: 10pt;
+        color: #4a5568;
         margin-bottom: 4px;
       }
       .company-logo {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
         flex-shrink: 0;
+        border-radius: 3px;
       }
-      .exp-title {
-        font-size: 12pt;
-        font-weight: 600;
-        color: var(--primary-color);
-      }
-      .exp-company {
-        font-size: 10pt;
-        color: var(--accent-color);
+      .company-name {
         font-weight: 500;
       }
       .exp-missions {
@@ -203,6 +207,56 @@
       }
       .exp-missions li {
         margin-bottom: 2px;
+      }
+
+      /* Projects */
+      .project {
+        margin-bottom: 14px;
+        position: relative;
+        padding-left: 16px;
+      }
+      .project.has-logo {
+        padding-left: 0;
+      }
+      .project:not(.has-logo)::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 6px;
+        width: 8px;
+        height: 8px;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        background: white;
+      }
+      .project-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 2px;
+      }
+      .project-logo {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+        flex-shrink: 0;
+        border-radius: 3px;
+      }
+      .project-title {
+        font-size: 11pt;
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+      .project-description {
+        font-size: 10pt;
+        color: #4a5568;
+        margin-left: 24px;
+      }
+      .project.has-logo .project-description {
+        margin-left: 24px;
+      }
+      .project:not(.has-logo) .project-description {
+        margin-left: 0;
       }
 
       /* Education */
@@ -220,7 +274,7 @@
     <div class="container">
       <aside class="sidebar">
         {{if .Basics.Image}}
-        <img src="{{.Basics.Image}}" alt="Photo" class="photo" />
+        <img src="{{safeURL .Basics.Image}}" alt="Photo" class="photo" />
         {{end}}
 
         <section>
@@ -326,8 +380,9 @@
         <section>
           <h2>{{.Labels.Experiences}}</h2>
           {{range .Work}}
-          <div class="experience">
-            <div class="exp-header">
+          <div class="experience{{if .CompanyLogo}} has-logo{{end}}">
+            <p class="exp-title">{{.Position}}</p>
+            <p class="exp-company">
               {{if .CompanyLogo}}
               <img
                 src="{{.CompanyLogo}}"
@@ -335,18 +390,18 @@
                 class="company-logo"
               />
               {{end}}
-              <div>
-                <p class="exp-title">{{.Position}}</p>
-                <p class="exp-company">
-                  {{.Company}} – {{.Location}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}} - {{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}})
-                </p>
-              </div>
-            </div>
+              <span class="company-name">{{.Company}}</span> - {{.Location}} ({{formatDate "January 2006"
+              .StartDate $.Meta.Lang}} - {{if .EndDate}}{{formatDate
+              "January 2006" .EndDate
+              $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}})
+            </p>
+            {{if .Highlights}}
             <ul class="exp-missions">
               {{range .Highlights}}
               <li>{{.}}</li>
               {{end}}
             </ul>
+            {{end}}
           </div>
           {{end}}
         </section>
@@ -373,9 +428,18 @@
         <section>
           <h2>{{.Labels.Projects}}</h2>
           {{range .Projects}}
-          <div class="experience">
-            <p class="exp-title">{{.Name}}</p>
-            <p class="exp-company">{{.Description}}</p>
+          <div class="project{{if .Logo}} has-logo{{end}}">
+            <div class="project-header">
+              {{if .Logo}}
+              <img
+                src="{{.Logo}}"
+                alt="{{.Name}}"
+                class="project-logo"
+              />
+              {{end}}
+              <span class="project-title">{{.Name}}</span>
+            </div>
+            <p class="project-description">{{.Description}}</p>
             {{if .Highlights}}
             <ul class="exp-missions">
               {{range .Highlights}}
@@ -393,7 +457,9 @@
           <div class="experience">
             <p class="exp-title">{{.Position}}</p>
             <p class="exp-company">
-              {{.Organization}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}} - {{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}})
+              {{.Organization}} ({{formatDate "January 2006" .StartDate
+              $.Meta.Lang}} - {{if .EndDate}}{{formatDate "January 2006"
+              .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}})
             </p>
             <ul class="exp-missions">
               {{range .Highlights}}
