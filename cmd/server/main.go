@@ -36,6 +36,6 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"status": "up"})
 	})
 
-	log.Printf("Server running on :%d", config.Port)
+	fmt.Printf("Server running on :%d\n", config.Port)
 	log.Fatal(router.Run(":" + fmt.Sprint(config.Port)))
 }
