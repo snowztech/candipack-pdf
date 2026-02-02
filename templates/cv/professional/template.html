@@ -98,7 +98,7 @@
         margin-bottom: 4px;
       }
       .sidebar li::before {
-        content: "• ";
+        content: " ";
         opacity: 0.7;
       }
       .lang-item {
@@ -257,21 +257,25 @@
           <h2>{{.Labels.Socials}}</h2>
           <p><a href="tel:{{.Basics.Phone}}">{{.Basics.Phone}}</a></p>
           <p><a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a></p>
-          {{if .Basics.URL}}
-          <p><a href="{{.Basics.URL}}">{{trimURLPrefix .Basics.URL}}</a></p>
-          {{end}} {{if .Basics.Profiles}}
-          <div style="margin-top: 8px">
-            {{range .Basics.Profiles}}
+          <div style="margin-top: 2px">
+            {{if .Basics.URL}}
+            <p><a href="{{.Basics.URL}}">{{trimURLPrefix .Basics.URL}}</a></p>
+            {{end}} {{if .Basics.Profiles}} {{range .Basics.Profiles}}
             <p><a href="{{.URL}}">{{trimURLPrefix .URL}}</a></p>
+            {{end}}{{end}}
+          </div>
+
+          <div style="margin-top: 2px">
+            {{if .Basics.Location.Address}}
+            <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
+            {{end}} {{if .Basics.Location.PostalCode}}
+            <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
+            {{else if .Basics.Location.City}}
+            <p>{{displayLocation .Basics.Location}}</p>
             {{end}}
           </div>
-          {{end}} {{if .Basics.Location.Address}}
-          <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
-          {{end}} {{if .Basics.Location.PostalCode}}
-          <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
-          {{else if .Basics.Location.City}}
-          <p>{{displayLocation .Basics.Location}}</p>
-          {{end}} {{if .Basics.Nationality}}
+
+          {{if .Basics.Nationality}}
           <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
           {{end}} {{if .Meta.WorkPermit}}
           <p style="margin-top: 4px">{{.Meta.WorkPermit}}</p>

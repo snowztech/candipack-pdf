@@ -17,6 +17,9 @@ build:
 run:
 	docker-compose up
 
+restart:
+	docker-compose up --build
+
 clean:
 	rm -rf output
 	rm -rf bin/
