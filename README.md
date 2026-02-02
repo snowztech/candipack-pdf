@@ -27,7 +27,7 @@ cp .env.example .env
 docker-compose up
 
 # Test health endpoint
-curl http://localhost:9000/health
+curl http://localhost:8080/health
 ```
 
 ### Local Development
@@ -44,7 +44,7 @@ go mod download
 go run ./cmd/server
 
 # Test health endpoint
-curl http://localhost:9000/health
+curl http://localhost:8080/health
 ```
 
 ## API Endpoints
@@ -81,7 +81,7 @@ X-API-Key: your-api-key (optional, if configured)
 ### Generate Resume
 
 ```bash
-curl -X POST http://localhost:9000/resume \
+curl -X POST http://localhost:8080/resume \
   -H "Content-Type: application/json" \
   -d @examples/resume.json \
   -o resume.pdf
@@ -90,7 +90,7 @@ curl -X POST http://localhost:9000/resume \
 ### Generate Cover Letter
 
 ```bash
-curl -X POST http://localhost:9000/cover-letter \
+curl -X POST http://localhost:8080/cover-letter \
   -H "Content-Type: application/json" \
   -d @examples/cover-letter.json \
   -o cover-letter.pdf
@@ -99,7 +99,7 @@ curl -X POST http://localhost:9000/cover-letter \
 ### List Templates
 
 ```bash
-curl http://localhost:9000/templates
+curl http://localhost:8080/templates
 ```
 
 ## JSON Schema
@@ -167,7 +167,7 @@ See [example](examples/cover-letter.json)
 
 | Variable  | Default | Description               |
 | --------- | ------- | ------------------------- |
-| `PORT`    | `9000`  | Server port               |
+| `PORT`    | `8080`  | Server port               |
 | `API_KEY` | -       | Optional API key for auth |
 
 ## Docker
@@ -195,10 +195,10 @@ docker-compose up --build
 docker build -t candipack-pdf .
 
 # Run
-docker run -p 9000:9000 candipack-pdf
+docker run -p 8080:8080 candipack-pdf
 
 # Run with custom env
-docker run -p 9000:9000 -e API_KEY=secret candipack-pdf
+docker run -p 8080:8080 -e API_KEY=secret candipack-pdf
 ```
 
 ## Project Structure

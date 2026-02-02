@@ -6,6 +6,7 @@ import (
 	"candipack-pdf/internal/middleware"
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,14 +17,14 @@ func main() {
 
 	// Apply middleware
 	router.Use(middleware.CORS())
-	if config.APIKey != "" {
-		router.Use(middleware.APIKey(config.APIKey))
-	}
 
 	// Initialize handlers
 	h := handlers.New()
 
 	apirouter := router.Group("/api")
+	if config.APIKey != "" {
+		apirouter.Use(middleware.APIKey(config.APIKey))
+	}
 
 	// Routes
 	apirouter.POST("/resume", h.HandleResume())
@@ -32,7 +33,7 @@ func main() {
 	apirouter.POST("/cover-letter/html", h.HandleCoverLetterHTML())
 	router.GET("/templates", h.HandleTemplates())
 	router.GET("/up", func(c *gin.Context) {
-		c.String(200, "ok")
+		c.JSON(http.StatusOK, gin.H{"status": "up"})
 	})
 
 	log.Printf("Server running on :%d", config.Port)

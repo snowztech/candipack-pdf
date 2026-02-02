@@ -2,5 +2,5 @@ services:
   app:
     build: .
     ports:
-      - "9000:9000"
+      - "8080:8080"
     env_file: .env

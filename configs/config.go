@@ -13,7 +13,7 @@ func Load() Config {
 	viper.AutomaticEnv()
 
 	conf := Config{}
-	conf.Port = getIntWithDefault("PORT", 9000)
+	conf.Port = getIntWithDefault("PORT", 8080)
 	conf.APIKey = viper.GetString("API_KEY")
 
 	return conf

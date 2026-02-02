@@ -14,6 +14,5 @@ COPY --from=builder /app/candipack .
 COPY --from=builder /app/templates ./templates
 
 ENV CHROME_PATH=/usr/bin/chromium-browser
-EXPOSE 9000
 
 CMD ["./candipack", "server"]
