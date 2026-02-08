@@ -222,7 +222,14 @@
         font-size: 11pt;
         font-weight: 600;
         color: var(--primary-color);
+        text-decoration: none;
       }
+
+      .project-title a:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
       .project-description {
         font-size: 10pt;
         color: #4a5568;
@@ -268,7 +275,8 @@
           <div style="margin-top: 2px">
             {{if .Basics.Location.Address}}
             <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
-            {{end}} {{if .Basics.Location.PostalCode}}
+            {{end}}
+            {{if .Basics.Location.PostalCode}}
             <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
             {{else if .Basics.Location.City}}
             <p>{{displayLocation .Basics.Location}}</p>
@@ -371,10 +379,8 @@
               />
               {{end}}
               <span class="company-name">{{.Company}}</span>{{if .Location}} -
-              {{.Location}}{{end}}{{if .StartDate}} ({{formatDate "January 2006"
-              .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} -
-              {{end}}{{if .EndDate}}{{formatDate "January 2006" .EndDate
-              $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
+              {{.Location}}{{end}} {{if .StartDate}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}}
+              - {{end}}{{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
             </p>
             {{if .Summary}}
             <p class="exp-summary">{{.Summary}}</p>
@@ -393,8 +399,12 @@
           <h2>{{.Labels.Education}}</h2>
           {{range .Education}}
           <p class="edu-item">
-            <span class="edu-degree">{{.StudyType}} {{.Area}}</span> –
-            {{.Institution}}
+            <span class="edu-degree">{{.StudyType}} {{.Area}}</span>
+            {{.Institution}} – {{.Institution}} {{if .StartDate}}
+            ({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or
+            .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate
+            "January 2006" .EndDate
+            $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
           </p>
           {{end}}
         </section>
@@ -415,8 +425,11 @@
             <div class="project-header">
               {{if .Logo}}
               <img src="{{.Logo}}" alt="{{.Name}}" class="project-logo" />
+              {{end}} {{if .URL}}
+              <a href="{{safeURL .URL}}" class="project-title"> {{.Name}} </a>
+              {{else}}
+              <span class="project-title"> {{.Name}} </span>
               {{end}}
-              <span class="project-title">{{.Name}}</span>
             </div>
             {{if .Description}}
             <p class="project-description">{{.Description}}</p>
@@ -437,11 +450,14 @@
           <div class="experience">
             <p class="exp-title">{{.Position}}</p>
             <p class="exp-company">
-              <span class="company-name">{{.Organization}}</span>{{if
-              .StartDate}} ({{formatDate "January 2006" .StartDate
-              $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} - {{end}}{{if
-              .EndDate}}{{formatDate "January 2006" .EndDate
-              $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
+              <span class="company-name">{{.Organization}}</span>
+              {{if .StartDate}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}}
+              {{if or .EndDate $.Labels.Present}} - {{end}}
+              {{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}
+              {{else}}
+              {{$.Labels.Present}}
+              {{end}})
+              {{end}}
             </p>
             {{if .Summary}}
             <p class="exp-summary">{{.Summary}}</p>
