@@ -33,3 +33,4 @@ ignored
 # Editor/IDE
 .idea/
 .vscode/
+.zed/
