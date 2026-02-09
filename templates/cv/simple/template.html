@@ -304,7 +304,7 @@
       }
       .lang-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 8px;
       }
       .lang-item {
@@ -329,6 +329,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 24px;
+        margin-bottom: 22px;
       }
       .two-col-section section {
         margin-bottom: 0;
