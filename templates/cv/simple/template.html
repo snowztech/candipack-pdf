@@ -9,7 +9,7 @@
     <style>
       :root {
         --primary-color: {{if .Meta.PrimaryColor}}{{.Meta.PrimaryColor}}{{else}}#1a1a1a{{end}};
-        --accent-color: {{if .Meta.AccentColor}}{{.Meta.AccentColor}}{{else}}#1a1a1a{{end}};
+        --accent-color: {{if .Meta.AccentColor}}{{.Meta.AccentColor}}{{else}}#ddd{{end}};
       }
       @page {
         size: A4;
@@ -39,7 +39,7 @@
 
       /* Header */
       .header {
-        border-bottom: 2px solid var(--accent-color);
+        border-bottom: 2px solid var(--primary-color);
         padding-bottom: 16px;
         margin-bottom: 24px;
       }
@@ -522,7 +522,7 @@
         <h2>{{.Labels.Publications}}</h2>
         {{range .Publications}}
         <div class="edu-item">
-          {{if .URL}}<a href="{{safeURL .URL}}" style="color: #1a1a1a; text-decoration: none; border-bottom: 1px dotted #999;"><span class="edu-degree">{{.Name}}</span></a>{{else}}<span class="edu-degree">{{.Name}}</span>{{end}}
+          {{if .URL}}<a href="{{safeURL .URL}}" style="color: var(--primary-color); text-decoration: none; border-bottom: 1px dotted #999;"><span class="edu-degree">{{.Name}}</span></a>{{else}}<span class="edu-degree">{{.Name}}</span>{{end}}
           – {{.Publisher}}
           {{if .ReleaseDate}}({{formatDate "January 2006" .ReleaseDate $.Meta.Lang}}){{end}}
         </div>
@@ -530,6 +530,7 @@
       </section>
       {{end}}
 
+      {{if or .Skills .Languages}}
       <div class="two-col-section">
         {{if .Skills}}
         <section>
@@ -556,6 +557,7 @@
         </section>
         {{end}}
       </div>
+      {{end}}
 
       {{if .SoftSkills}}
       <section>

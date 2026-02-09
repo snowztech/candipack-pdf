@@ -5,8 +5,8 @@
     "availability": "Immediately",
     "activityRate": "100%",
     "workPermit": "US Citizen",
-    "primaryColor": "#2563eb",
-    "accentColor": "#1e40af"
+    "primaryColor": "#2c3e50",
+    "accentColor": "#c0784a"
   },
   "basics": {
     "name": "Jane Smith",
@@ -44,7 +44,7 @@
       "company": "TechCorp Inc.",
       "location": "San Francisco, CA",
       "startDate": "2021-03",
-      "endDate": "Present",
+      "endDate": "",
       "summary": "Leading backend development team, architecting microservices",
       "highlights": [
         "Reduced API latency by 40% through caching optimization",
