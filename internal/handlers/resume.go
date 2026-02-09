@@ -42,6 +42,9 @@ func (h *Handler) HandleResume() gin.HandlerFunc {
 			"AdditionalInfo": lang.Translate(resumeData.Meta.Lang, "AdditionalInfo"),
 			"References":     lang.Translate(resumeData.Meta.Lang, "References"),
 			"Present":        lang.Translate(resumeData.Meta.Lang, "Present"),
+			"Availability":   lang.Translate(resumeData.Meta.Lang, "Availability"),
+			"ActivityRate":   lang.Translate(resumeData.Meta.Lang, "ActivityRate"),
+			"Awards":         lang.Translate(resumeData.Meta.Lang, "Awards"),
 		}
 
 		htmlFile, err := h.parser.ParseResume(resumeData.Meta.Template, resumeData, labels)
@@ -97,6 +100,9 @@ func (h *Handler) HandleResumeHTML() gin.HandlerFunc {
 			"AdditionalInfo": lang.Translate(resumeData.Meta.Lang, "AdditionalInfo"),
 			"References":     lang.Translate(resumeData.Meta.Lang, "References"),
 			"Present":        lang.Translate(resumeData.Meta.Lang, "Present"),
+			"Availability":   lang.Translate(resumeData.Meta.Lang, "Availability"),
+			"ActivityRate":   lang.Translate(resumeData.Meta.Lang, "ActivityRate"),
+			"Awards":         lang.Translate(resumeData.Meta.Lang, "Awards"),
 		}
 
 		html, err := h.parser.ParseResumeHTML(resumeData.Meta.Template, resumeData, labels)
