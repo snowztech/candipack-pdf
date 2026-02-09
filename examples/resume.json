@@ -4,7 +4,9 @@
     "lang": "en",
     "availability": "Immediately",
     "activityRate": "100%",
-    "workPermit": "US Citizen"
+    "workPermit": "US Citizen",
+    "primaryColor": "#2c3e50",
+    "accentColor": "#c0784a"
   },
   "basics": {
     "name": "Jane Smith",
@@ -14,7 +16,11 @@
     "phone": "+1 555-123-4567",
     "url": "https://janesmith.dev",
     "summary": "Passionate software engineer with 5+ years of experience building scalable web applications. Specialized in Go, TypeScript, and cloud infrastructure.",
+    "birthDate": "1997-04-15",
+    "nationality": "American",
     "location": {
+      "address": "123 Market Street",
+      "postalCode": "94105",
       "city": "San Francisco",
       "countryCode": "US",
       "region": "California"
@@ -38,14 +44,18 @@
       "company": "TechCorp Inc.",
       "location": "San Francisco, CA",
       "startDate": "2021-03",
-      "endDate": "Present",
+      "endDate": "",
       "summary": "Leading backend development team, architecting microservices",
       "highlights": [
         "Reduced API latency by 40% through caching optimization",
         "Migrated monolith to microservices architecture",
         "Led team of 5 engineers"
       ],
-      "contractType": "Full-time"
+      "contractType": "Full-time",
+      "companyLogo": "https://example.com/logos/techcorp.png",
+      "teamDetails": "Platform Engineering, 12 engineers",
+      "stackDetails": "Go, Kubernetes, PostgreSQL, Redis",
+      "companyURL": "https://techcorp.example.com"
     },
     {
       "position": "Software Engineer",
@@ -59,7 +69,25 @@
         "Implemented payment processing with Stripe",
         "Contributed to open-source projects"
       ],
-      "contractType": "Full-time"
+      "contractType": "Full-time",
+      "companyLogo": "https://example.com/logos/startupxyz.png",
+      "teamDetails": "Product Team, 6 engineers",
+      "stackDetails": "TypeScript, React, Node.js, MongoDB",
+      "companyURL": "https://startupxyz.example.com"
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Code for America",
+      "position": "Volunteer Developer",
+      "url": "https://codeforamerica.org",
+      "startDate": "2020-01",
+      "endDate": "2021-12",
+      "summary": "Built civic tech tools to improve government services accessibility",
+      "highlights": [
+        "Developed a food bank locator used by 10,000+ residents",
+        "Mentored 3 junior developers"
+      ]
     }
   ],
   "education": [
@@ -83,15 +111,38 @@
       "title": "AWS Solutions Architect",
       "date": "2022-08",
       "issuer": "Amazon Web Services",
-      "score": "",
+      "score": "Professional",
       "url": "https://aws.amazon.com/certification"
     },
     {
       "title": "Google Cloud Professional",
       "date": "2023-03",
       "issuer": "Google Cloud",
-      "score": "",
+      "score": "Professional",
       "url": "https://cloud.google.com/certification"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Best Innovation Award",
+      "date": "2022-11",
+      "awarder": "TechCorp Inc.",
+      "summary": "Awarded for leading the migration to microservices architecture, resulting in 40% latency reduction"
+    },
+    {
+      "title": "Hackathon Winner",
+      "date": "2018-10",
+      "awarder": "Stanford HackFest",
+      "summary": "First place for building an AI-powered accessibility tool for visually impaired users"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Scaling Microservices with Go",
+      "publisher": "TechBlog Weekly",
+      "releaseDate": "2023-06",
+      "summary": "A deep dive into patterns and best practices for building scalable microservices in Go",
+      "url": "https://techblog.example.com/scaling-microservices-go"
     }
   ],
   "skills": [
@@ -157,6 +208,7 @@
         "Handles 1000+ requests per day"
       ],
       "url": "https://github.com/example/pdf-gen",
+      "logo": "https://example.com/logos/pdf-gen.png",
       "stackDetails": "Go, ChromeDP, Docker"
     }
   ],

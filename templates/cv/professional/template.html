@@ -9,7 +9,7 @@
     <style>
       :root {
         --primary-color: {{if .Meta.PrimaryColor}}{{.Meta.PrimaryColor}}{{else}}#2c3e50{{end}};
-        --accent-color: {{if .Meta.AccentColor}}{{.Meta.AccentColor}}{{else}}#e07c4c{{end}};
+        --accent-color: {{if .Meta.AccentColor}}{{.Meta.AccentColor}}{{else}}#c0784a{{end}};
       }
       @page {
         size: A4;
@@ -85,6 +85,8 @@
       }
       .sidebar section {
         margin-bottom: 24px;
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
       .sidebar p,
       .sidebar li {
@@ -156,8 +158,10 @@
         font-weight: 600;
         color: var(--primary-color);
         padding-bottom: 6px;
-        border-bottom: 2px solid var(--primary-color);
+        border-bottom: 2px solid var(--accent-color);
         margin-bottom: 14px;
+        break-after: avoid;
+        page-break-after: avoid;
       }
       .main section {
         margin-bottom: 20px;
@@ -166,6 +170,8 @@
       /* Experience */
       .experience {
         margin-bottom: 14px;
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
       .exp-title {
         font-size: 11pt;
@@ -180,6 +186,7 @@
         font-size: 10pt;
         color: #4a5568;
         margin-bottom: 4px;
+        flex-wrap: wrap;
       }
       .company-logo {
         width: 18px;
@@ -190,6 +197,19 @@
       }
       .company-name {
         font-weight: 500;
+      }
+      a.company-name {
+        color: #4a5568;
+        text-decoration: none;
+      }
+      a.company-name:hover {
+        text-decoration: underline;
+      }
+      .exp-details {
+        font-size: 9pt;
+        color: #6b7280;
+        font-style: italic;
+        margin-bottom: 4px;
       }
       .exp-missions {
         padding-left: 16px;
@@ -204,6 +224,8 @@
       /* Projects */
       .project {
         margin-bottom: 14px;
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
       .project-header {
         display: flex;
@@ -224,12 +246,10 @@
         color: var(--primary-color);
         text-decoration: none;
       }
-
-      .project-title a:hover {
+      .project-title:hover {
         text-decoration: underline;
         cursor: pointer;
       }
-
       .project-description {
         font-size: 10pt;
         color: #4a5568;
@@ -246,10 +266,38 @@
       .edu-item {
         font-size: 10pt;
         color: #4a5568;
-        margin-bottom: 4px;
+        margin-bottom: 8px;
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
       .edu-degree {
         font-weight: 500;
+      }
+      .edu-score {
+        font-size: 9pt;
+        color: #6b7280;
+      }
+      .edu-courses {
+        font-size: 9pt;
+        color: #6b7280;
+        font-style: italic;
+      }
+
+      /* Awards */
+      .award-item {
+        font-size: 10pt;
+        color: #4a5568;
+        margin-bottom: 8px;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .award-title {
+        font-weight: 500;
+      }
+      .award-summary {
+        font-size: 9pt;
+        color: #6b7280;
+        margin-top: 2px;
       }
     </style>
   </head>
@@ -262,16 +310,21 @@
 
         <section>
           <h2>{{.Labels.Socials}}</h2>
-          <p><a href="tel:{{.Basics.Phone}}">{{.Basics.Phone}}</a></p>
-          <p><a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a></p>
+          {{if .Basics.Phone}}<p><a href="tel:{{.Basics.Phone}}">{{.Basics.Phone}}</a></p>{{end}}
+          {{if .Basics.Email}}<p><a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a></p>{{end}}
+
+          {{if or .Basics.URL .Basics.Profiles}}
           <div style="margin-top: 2px">
             {{if .Basics.URL}}
             <p><a href="{{.Basics.URL}}">{{trimURLPrefix .Basics.URL}}</a></p>
-            {{end}} {{if .Basics.Profiles}} {{range .Basics.Profiles}}
+            {{end}}
+            {{range .Basics.Profiles}}
             <p><a href="{{.URL}}">{{trimURLPrefix .URL}}</a></p>
-            {{end}}{{end}}
+            {{end}}
           </div>
+          {{end}}
 
+          {{if or .Basics.Location.Address .Basics.Location.City}}
           <div style="margin-top: 2px">
             {{if .Basics.Location.Address}}
             <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
@@ -282,10 +335,15 @@
             <p>{{displayLocation .Basics.Location}}</p>
             {{end}}
           </div>
+          {{end}}
 
+          {{if .Basics.BirthDate}}
+          <p style="margin-top: 4px">{{formatDate "2 January 2006" .Basics.BirthDate .Meta.Lang}}</p>
+          {{end}}
           {{if .Basics.Nationality}}
           <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
-          {{end}} {{if .Meta.WorkPermit}}
+          {{end}}
+          {{if .Meta.WorkPermit}}
           <p style="margin-top: 4px">{{.Meta.WorkPermit}}</p>
           {{end}}
         </section>
@@ -299,7 +357,9 @@
             {{end}}
           </ul>
         </section>
-        {{end}} {{if .SoftSkills}}
+        {{end}}
+
+        {{if .SoftSkills}}
         <section>
           <h2>{{.Labels.SoftSkills}}</h2>
           <ul>
@@ -308,7 +368,9 @@
             {{end}}
           </ul>
         </section>
-        {{end}} {{if .Languages}}
+        {{end}}
+
+        {{if .Languages}}
         <section>
           <h2>{{.Labels.Languages}}</h2>
           <ul>
@@ -319,21 +381,20 @@
         </section>
         {{end}}
 
-        <!-- Informations Complémentaires -->
         {{if or .Meta.ActivityRate .Meta.Availability}}
         <section>
           <h2>{{.Labels.AdditionalInfo}}</h2>
           <div class="additional-info">
             {{if .Meta.ActivityRate}}
-            <p>Taux souhaité: {{.Meta.ActivityRate}}</p>
-            {{end}} {{if .Meta.Availability}}
-            <p>Disponibilité: {{.Meta.Availability}}</p>
+            <p>{{.Labels.ActivityRate}}: {{.Meta.ActivityRate}}</p>
+            {{end}}
+            {{if .Meta.Availability}}
+            <p>{{.Labels.Availability}}: {{.Meta.Availability}}</p>
             {{end}}
           </div>
         </section>
         {{end}}
 
-        <!-- References -->
         {{if .References}}
         <section>
           <h2>{{.Labels.References}}</h2>
@@ -344,7 +405,9 @@
           </div>
           {{end}}
         </section>
-        {{end}} {{if .Interests}}
+        {{end}}
+
+        {{if .Interests}}
         <section>
           <h2>{{.Labels.Interests}}</h2>
           {{range .Interests}}
@@ -359,7 +422,8 @@
           <h1 class="name">{{.Basics.Name}}</h1>
           {{if .Basics.Label}}
           <p class="job-title">{{.Basics.Label}}</p>
-          {{end}} {{if .Basics.Summary}}
+          {{end}}
+          {{if .Basics.Summary}}
           <p class="summary">{{.Basics.Summary}}</p>
           {{end}}
         </header>
@@ -378,62 +442,18 @@
                 class="company-logo"
               />
               {{end}}
-              <span class="company-name">{{.Company}}</span>{{if .Location}} -
-              {{.Location}}{{end}} {{if .StartDate}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}}
-              - {{end}}{{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
+              {{if .CompanyURL}}<a href="{{safeURL .CompanyURL}}" class="company-name">{{.Company}}</a>{{else}}<span class="company-name">{{.Company}}</span>{{end}}{{if .Location}} - {{.Location}}{{end}}
+              {{if .StartDate}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}{{if .ContractType}} · {{.ContractType}}{{end}}
             </p>
+            {{if or .StackDetails .TeamDetails}}
+            <p class="exp-details">
+              {{if .TeamDetails}}{{.TeamDetails}}{{end}}{{if and .TeamDetails .StackDetails}} · {{end}}{{if .StackDetails}}{{.StackDetails}}{{end}}
+            </p>
+            {{end}}
             {{if .Summary}}
             <p class="exp-summary">{{.Summary}}</p>
-            {{end}} {{if .Highlights}}
-            <ul class="exp-missions">
-              {{range .Highlights}} {{if .}}
-              <li>{{.}}</li>
-              {{end}} {{end}}
-            </ul>
             {{end}}
-          </div>
-          {{end}}
-        </section>
-        {{end}} {{if .Education}}
-        <section>
-          <h2>{{.Labels.Education}}</h2>
-          {{range .Education}}
-          <p class="edu-item">
-            <span class="edu-degree">{{.StudyType}} {{.Area}}</span>
-            {{.Institution}} – {{.Institution}} {{if .StartDate}}
-            ({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or
-            .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate
-            "January 2006" .EndDate
-            $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
-          </p>
-          {{end}}
-        </section>
-        {{end}} {{if .Certificates}}
-        <section>
-          <h2>{{.Labels.Certificates}}</h2>
-          {{range .Certificates}}
-          <p class="edu-item">
-            <span class="edu-degree">{{.Title}}</span> – {{.Issuer}} ({{.Date}})
-          </p>
-          {{end}}
-        </section>
-        {{end}} {{if .Projects}}
-        <section>
-          <h2>{{.Labels.Projects}}</h2>
-          {{range .Projects}}
-          <div class="project">
-            <div class="project-header">
-              {{if .Logo}}
-              <img src="{{.Logo}}" alt="{{.Name}}" class="project-logo" />
-              {{end}} {{if .URL}}
-              <a href="{{safeURL .URL}}" class="project-title"> {{.Name}} </a>
-              {{else}}
-              <span class="project-title"> {{.Name}} </span>
-              {{end}}
-            </div>
-            {{if .Description}}
-            <p class="project-description">{{.Description}}</p>
-            {{end}} {{if .Highlights}}
+            {{if .Highlights}}
             <ul class="exp-missions">
               {{range .Highlights}}{{if .}}
               <li>{{.}}</li>
@@ -443,7 +463,88 @@
           </div>
           {{end}}
         </section>
-        {{end}} {{if .Volunteer}}
+        {{end}}
+
+        {{if .Education}}
+        <section>
+          <h2>{{.Labels.Education}}</h2>
+          {{range .Education}}
+          <div class="edu-item">
+            <p>
+              <span class="edu-degree">{{.StudyType}} {{.Area}}</span>
+              – {{.Institution}}{{if .Location}}, {{.Location}}{{end}}
+              {{if .StartDate}}({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
+            </p>
+            {{if .Score}}<p class="edu-score">{{.Score}}</p>{{end}}
+            {{if .Courses}}
+            <p class="edu-courses">{{range $i, $c := .Courses}}{{if $i}}, {{end}}{{$c}}{{end}}</p>
+            {{end}}
+          </div>
+          {{end}}
+        </section>
+        {{end}}
+
+        {{if .Certificates}}
+        <section>
+          <h2>{{.Labels.Certificates}}</h2>
+          {{range .Certificates}}
+          <p class="edu-item">
+            <span class="edu-degree">{{.Title}}</span> – {{.Issuer}}
+            {{if .Date}}({{formatDate "January 2006" .Date $.Meta.Lang}}){{end}}{{if .Score}} · {{.Score}}{{end}}
+          </p>
+          {{end}}
+        </section>
+        {{end}}
+
+        {{if .Awards}}
+        <section>
+          <h2>{{.Labels.Awards}}</h2>
+          {{range .Awards}}
+          <div class="award-item">
+            <p>
+              <span class="award-title">{{.Title}}</span> – {{.Awarder}}
+              {{if .Date}}({{formatDate "January 2006" .Date $.Meta.Lang}}){{end}}
+            </p>
+            {{if .Summary}}<p class="award-summary">{{.Summary}}</p>{{end}}
+          </div>
+          {{end}}
+        </section>
+        {{end}}
+
+        {{if .Projects}}
+        <section>
+          <h2>{{.Labels.Projects}}</h2>
+          {{range .Projects}}
+          <div class="project">
+            <div class="project-header">
+              {{if .Logo}}
+              <img src="{{safeURL .Logo}}" alt="{{.Name}}" class="project-logo" />
+              {{end}}
+              {{if .URL}}
+              <a href="{{safeURL .URL}}" class="project-title">{{.Name}}</a>
+              {{else}}
+              <span class="project-title">{{.Name}}</span>
+              {{end}}
+            </div>
+            {{if .Description}}
+            <p class="project-description">{{.Description}}</p>
+            {{end}}
+            {{if .StackDetails}}
+            <p class="exp-details">{{.StackDetails}}</p>
+            {{end}}
+            {{if .Highlights}}
+            <ul class="exp-missions">
+              {{range .Highlights}}{{if .}}
+              <li>{{.}}</li>
+              {{end}}{{end}}
+            </ul>
+            {{end}}
+          </div>
+          {{end}}
+        </section>
+        {{end}}
+
+        {{if .Volunteer}}
         <section>
           <h2>{{.Labels.Volunteer}}</h2>
           {{range .Volunteer}}
@@ -451,17 +552,12 @@
             <p class="exp-title">{{.Position}}</p>
             <p class="exp-company">
               <span class="company-name">{{.Organization}}</span>
-              {{if .StartDate}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}}
-              {{if or .EndDate $.Labels.Present}} - {{end}}
-              {{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}
-              {{else}}
-              {{$.Labels.Present}}
-              {{end}})
-              {{end}}
+              {{if .StartDate}} ({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
             </p>
             {{if .Summary}}
             <p class="exp-summary">{{.Summary}}</p>
-            {{else if .Highlights}}
+            {{end}}
+            {{if .Highlights}}
             <ul class="exp-missions">
               {{range .Highlights}}{{if .}}
               <li>{{.}}</li>
@@ -471,13 +567,16 @@
           </div>
           {{end}}
         </section>
-        {{end}} {{if .Publications}}
+        {{end}}
+
+        {{if .Publications}}
         <section>
           <h2>{{.Labels.Publications}}</h2>
           {{range .Publications}}
           <p class="edu-item">
-            <span class="edu-degree">{{.Name}}</span> – {{.Publisher}}
-            ({{.ReleaseDate}})
+            {{if .URL}}<a href="{{safeURL .URL}}" style="color: var(--primary-color); text-decoration: none;"><span class="edu-degree">{{.Name}}</span></a>{{else}}<span class="edu-degree">{{.Name}}</span>{{end}}
+            – {{.Publisher}}
+            {{if .ReleaseDate}}({{formatDate "January 2006" .ReleaseDate $.Meta.Lang}}){{end}}
           </p>
           {{end}}
         </section>

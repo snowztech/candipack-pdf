@@ -19,6 +19,9 @@ var translations = map[string]map[string]string{
 		"References":     "References",
 		"Subject":        "Subject",
 		"Present":        "Present",
+		"Availability":   "Availability",
+		"ActivityRate":   "Activity Rate",
+		"Awards":         "Awards",
 	},
 	"fr": {
 		"Education":      "Formation",
@@ -38,6 +41,9 @@ var translations = map[string]map[string]string{
 		"References":     "Références",
 		"Subject":        "Objet",
 		"Present":        "Présent",
+		"Availability":   "Disponibilité",
+		"ActivityRate":   "Taux d'activité",
+		"Awards":         "Distinctions",
 	},
 }
 
