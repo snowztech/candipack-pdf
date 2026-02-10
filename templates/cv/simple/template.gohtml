@@ -58,7 +58,8 @@
             .contact-row {
               display: flex;
               flex-wrap: wrap;
-              gap: 16px;
+              align-items: center;
+              gap: 4px 0;
               font-size: 9.5pt;
               color: #444;
             }
@@ -72,7 +73,17 @@
             .contact-row span {
               display: flex;
               align-items: center;
-              gap: 4px;
+              white-space: nowrap;
+            }
+            .contact-row span + span::before {
+              content: "\00b7";
+              color: #999;
+              margin: 0 8px;
+            }
+            .personal-info {
+              margin-top: 2px;
+              font-style: italic;
+              color: #666;
             }
 
             /* Sections */
@@ -351,24 +362,22 @@
                 <p class="job-title">{{.Basics.Label}}</p>
                 {{end}}
                 <div class="contact-row">
-                    {{if .Basics.Email}}<span
-                        ><a href="mailto:{{.Basics.Email}}"
-                            >{{.Basics.Email}}</a
-                        ></span
-                    >{{end}} {{if .Basics.Phone}}<span
-                        ><a href="tel:{{.Basics.Phone}}"
-                            >{{.Basics.Phone}}</a
-                        ></span
-                    >{{end}} {{if .Basics.Location.City}}<span
-                        >{{displayLocation .Basics.Location}}</span
-                    >{{end}} {{if .Basics.URL}}<span
-                        ><a href="{{.Basics.URL}}"
-                            >{{trimURLPrefix .Basics.URL}}</a
-                        ></span
-                    >{{end}} {{range .Basics.Profiles}}
-                    <span><a href="{{.URL}}">{{trimURLPrefix .URL}}</a></span>
-                    {{end}}
+                    {{- if .Basics.Email}}<span><a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a></span>{{end -}}
+                    {{- if .Basics.Phone}}<span><a href="tel:{{.Basics.Phone}}">{{.Basics.Phone}}</a></span>{{end -}}
+                    {{- if .Basics.Location.City}}<span>{{displayLocation .Basics.Location}}</span>{{end -}}
                 </div>
+                {{if or .Basics.URL .Basics.Profiles}}
+                <div class="contact-row">
+                    {{- if .Basics.URL}}<span><a href="{{.Basics.URL}}">{{trimURLPrefix .Basics.URL}}</a></span>{{end -}}
+                    {{- range .Basics.Profiles}}<span><a href="{{.URL}}">{{if .Network}}{{.Network}}{{else}}{{trimURLPrefix .URL}}{{end}}</a></span>{{end -}}
+                </div>
+                {{end}}
+                {{if or .Basics.Nationality .Basics.BirthDate}}
+                <div class="contact-row personal-info">
+                    {{- if .Basics.Nationality}}<span>{{.Basics.Nationality}}</span>{{end -}}
+                    {{- if .Basics.BirthDate}}<span>{{formatDate "2 January 2006" .Basics.BirthDate .Meta.Lang}}</span>{{end -}}
+                </div>
+                {{end}}
             </header>
 
             {{if .Basics.Summary}}
@@ -470,7 +479,7 @@
                 <h2>{{.Labels.Certificates}}</h2>
                 {{range .Certificates}}
                 <div class="edu-item">
-                    <span class="edu-degree">{{.Title}}</span> – {{.Issuer}}
+                    {{if .URL}}<a href="{{safeURL .URL}}" style="color: var(--primary-color); text-decoration: none;"><span class="edu-degree">{{.Title}}</span></a>{{else}}<span class="edu-degree">{{.Title}}</span>{{end}} – {{.Issuer}}
                     {{if .Date}}({{formatDate "2006" .Date $.Meta.Lang}}){{end}}{{if .Score}} · {{.Score}}{{end}}
                 </div>
                 {{end}}
@@ -500,7 +509,7 @@
                             {{- if .StartDate}}{{formatDate "January 2006" .StartDate $.Meta.Lang}}{{end -}} {{- if or .EndDate $.Labels.Present}} - {{end -}} {{- if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end -}}
                         </span>
                     </div>
-                    <p class="exp-company">{{.Organization}}</p>
+                    <p class="exp-company">{{if .URL}}<a href="{{safeURL .URL}}" style="color: inherit; text-decoration: none; border-bottom: 1px dotted #999;">{{.Organization}}</a>{{else}}{{.Organization}}{{end}}</p>
                     {{if .Summary}}
                     <p class="exp-summary">{{.Summary}}</p>
                     {{end}} {{if .Highlights}}
@@ -528,6 +537,9 @@
                         ><span class="edu-degree">{{.Name}}</span></a
                     >{{else}}<span class="edu-degree">{{.Name}}</span>{{end}} –
                     {{.Publisher}} {{if .ReleaseDate}}({{formatDate "January 2006" .ReleaseDate $.Meta.Lang}}){{end}}
+                    {{if .Summary}}
+                    <p class="exp-summary">{{.Summary}}</p>
+                    {{end}}
                 </div>
                 {{end}}
             </section>
