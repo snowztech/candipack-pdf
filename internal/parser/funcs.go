@@ -16,6 +16,7 @@ var funcs = template.FuncMap{
 	"trimURLPrefix":   trimURLPrefix,
 	"split":           split,
 	"safeURL":         safeURL,
+	"lower":           strings.ToLower,
 }
 
 func displayLocation(location models.Location) string {

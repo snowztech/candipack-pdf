@@ -343,8 +343,11 @@
           {{if .Basics.Nationality}}
           <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
           {{end}}
-          {{if .Meta.WorkPermit}}
-          <p style="margin-top: 4px">{{.Meta.WorkPermit}}</p>
+          {{if .Basics.WorkPermit}}
+          <p style="margin-top: 4px">{{.Basics.WorkPermit}}</p>
+          {{end}}
+          {{if .Basics.DrivingLicense}}
+          <p style="margin-top: 4px">{{.Basics.DrivingLicense}}</p>
           {{end}}
         </section>
 

@@ -369,13 +369,15 @@
                 {{if or .Basics.URL .Basics.Profiles}}
                 <div class="contact-row">
                     {{- if .Basics.URL}}<span><a href="{{.Basics.URL}}">{{trimURLPrefix .Basics.URL}}</a></span>{{end -}}
-                    {{- range .Basics.Profiles}}<span><a href="{{.URL}}">{{if .Network}}{{.Network}}{{else}}{{trimURLPrefix .URL}}{{end}}</a></span>{{end -}}
+                    {{- range .Basics.Profiles}}<span><a href="{{.URL}}">{{if .Network}}{{lower .Network}}{{else}}{{trimURLPrefix .URL}}{{end}}</a></span>{{end -}}
                 </div>
                 {{end}}
-                {{if or .Basics.Nationality .Basics.BirthDate}}
+                {{if or .Basics.Nationality .Basics.BirthDate .Basics.DrivingLicense .Basics.WorkPermit}}
                 <div class="contact-row personal-info">
                     {{- if .Basics.Nationality}}<span>{{.Basics.Nationality}}</span>{{end -}}
                     {{- if .Basics.BirthDate}}<span>{{formatDate "2 January 2006" .Basics.BirthDate .Meta.Lang}}</span>{{end -}}
+                    {{- if .Basics.DrivingLicense}}<span>{{.Basics.DrivingLicense}}</span>{{end -}}
+                    {{- if .Basics.WorkPermit}}<span>{{.Basics.WorkPermit}}</span>{{end -}}
                 </div>
                 {{end}}
             </header>
@@ -596,8 +598,7 @@
                 </div>
                 {{end}}
             </section>
-            {{end}} {{if or .Meta.ActivityRate .Meta.Availability
-            .Meta.WorkPermit}}
+            {{end}} {{if or .Meta.ActivityRate .Meta.Availability}}
             <section>
                 <h2>{{.Labels.AdditionalInfo}}</h2>
                 <div class="additional-info">
@@ -605,8 +606,6 @@
                     <p>{{.Labels.ActivityRate}}: {{.Meta.ActivityRate}}</p>
                     {{end}} {{if .Meta.Availability}}
                     <p>{{.Labels.Availability}}: {{.Meta.Availability}}</p>
-                    {{end}} {{if .Meta.WorkPermit}}
-                    <p>{{.Meta.WorkPermit}}</p>
                     {{end}}
                 </div>
             </section>
