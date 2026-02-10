@@ -26,7 +26,7 @@ func displayLocation(location models.Location) string {
 		parts = append(parts, location.Address)
 	}
 	if location.PostalCode != "" || location.City != "" {
-		cityPart := strings.TrimSpace(location.PostalCode + " " + location.City)
+		cityPart := strings.TrimSpace(location.City + " " + location.PostalCode)
 		parts = append(parts, cityPart)
 	}
 	if location.Region != "" {

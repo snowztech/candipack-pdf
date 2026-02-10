@@ -326,14 +326,7 @@
 
           {{if or .Basics.Location.Address .Basics.Location.City}}
           <div style="margin-top: 2px">
-            {{if .Basics.Location.Address}}
-            <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
-            {{end}}
-            {{if .Basics.Location.PostalCode}}
-            <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
-            {{else if .Basics.Location.City}}
-            <p>{{displayLocation .Basics.Location}}</p>
-            {{end}}
+            <p style="margin-top: 8px">{{displayLocation .Basics.Location}}</p>
           </div>
           {{end}}
 
