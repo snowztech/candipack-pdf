@@ -31,6 +31,10 @@ func displayLocation(location models.Location) string {
 		parts = append(parts, location.CountryCode)
 	}
 
+	if location.CountryCode != "" {
+		parts = append(parts, location.CountryCode)
+	}
+
 	return strings.Join(parts, ", ")
 }
 

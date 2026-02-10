@@ -473,7 +473,7 @@
             <p>
               <span class="edu-degree">{{.StudyType}} {{.Area}}</span>
               – {{.Institution}}{{if .Location}}, {{.Location}}{{end}}
-              {{if .StartDate}}({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
+              {{if .StartDate}}({{formatDate "2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate "2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
             </p>
             {{if .Score}}<p class="edu-score">{{.Score}}</p>{{end}}
             {{if .Courses}}
@@ -490,7 +490,7 @@
           {{range .Certificates}}
           <p class="edu-item">
             <span class="edu-degree">{{.Title}}</span> – {{.Issuer}}
-            {{if .Date}}({{formatDate "January 2006" .Date $.Meta.Lang}}){{end}}{{if .Score}} · {{.Score}}{{end}}
+            {{if .Date}}({{formatDate "2006" .Date $.Meta.Lang}}){{end}}{{if .Score}} · {{.Score}}{{end}}
           </p>
           {{end}}
         </section>
