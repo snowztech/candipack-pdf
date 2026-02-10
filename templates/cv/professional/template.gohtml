@@ -326,14 +326,7 @@
 
           {{if or .Basics.Location.Address .Basics.Location.City}}
           <div style="margin-top: 2px">
-            {{if .Basics.Location.Address}}
-            <p style="margin-top: 8px">{{.Basics.Location.Address}}</p>
-            {{end}}
-            {{if .Basics.Location.PostalCode}}
-            <p>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</p>
-            {{else if .Basics.Location.City}}
-            <p>{{displayLocation .Basics.Location}}</p>
-            {{end}}
+            <p style="margin-top: 8px">{{displayLocation .Basics.Location}}</p>
           </div>
           {{end}}
 
@@ -343,8 +336,11 @@
           {{if .Basics.Nationality}}
           <p style="margin-top: 4px">{{.Basics.Nationality}}</p>
           {{end}}
-          {{if .Meta.WorkPermit}}
-          <p style="margin-top: 4px">{{.Meta.WorkPermit}}</p>
+          {{if .Basics.WorkPermit}}
+          <p style="margin-top: 4px">{{.Basics.WorkPermit}}</p>
+          {{end}}
+          {{if .Basics.DrivingLicense}}
+          <p style="margin-top: 4px">{{.Basics.DrivingLicense}}</p>
           {{end}}
         </section>
 
@@ -473,7 +469,7 @@
             <p>
               <span class="edu-degree">{{.StudyType}} {{.Area}}</span>
               – {{.Institution}}{{if .Location}}, {{.Location}}{{end}}
-              {{if .StartDate}}({{formatDate "January 2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate "January 2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
+              {{if .StartDate}}({{formatDate "2006" .StartDate $.Meta.Lang}}{{if or .EndDate $.Labels.Present}} - {{end}}{{if .EndDate}}{{formatDate "2006" .EndDate $.Meta.Lang}}{{else}}{{$.Labels.Present}}{{end}}){{end}}
             </p>
             {{if .Score}}<p class="edu-score">{{.Score}}</p>{{end}}
             {{if .Courses}}
@@ -490,7 +486,7 @@
           {{range .Certificates}}
           <p class="edu-item">
             <span class="edu-degree">{{.Title}}</span> – {{.Issuer}}
-            {{if .Date}}({{formatDate "January 2006" .Date $.Meta.Lang}}){{end}}{{if .Score}} · {{.Score}}{{end}}
+            {{if .Date}}({{formatDate "2006" .Date $.Meta.Lang}}){{end}}{{if .Score}} · {{.Score}}{{end}}
           </p>
           {{end}}
         </section>

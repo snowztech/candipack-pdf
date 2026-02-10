@@ -18,17 +18,19 @@ type Resume struct {
 }
 
 type Basics struct {
-	Name        string    `json:"name"`
-	Label       string    `json:"label"`
-	Image       string    `json:"image"`
-	Email       string    `json:"email"`
-	Phone       string    `json:"phone"`
-	Summary     string    `json:"summary"`
-	BirthDate   string    `json:"birthDate"`
-	Nationality string    `json:"nationality"`
-	Location    Location  `json:"location"`
-	URL         string    `json:"url"`
-	Profiles    []Profile `json:"profiles"`
+	Name           string    `json:"name"`
+	Label          string    `json:"label"`
+	Image          string    `json:"image"`
+	Email          string    `json:"email"`
+	Phone          string    `json:"phone"`
+	Summary        string    `json:"summary"`
+	BirthDate      string    `json:"birthDate"`
+	Nationality    string    `json:"nationality"`
+	WorkPermit     string    `json:"workPermit"`
+	DrivingLicense string    `json:"drivingLicense"`
+	Location       Location  `json:"location"`
+	URL            string    `json:"url"`
+	Profiles       []Profile `json:"profiles"`
 }
 
 type Location struct {
@@ -139,7 +141,6 @@ type Meta struct {
 	Lang         string `json:"lang"`
 	Availability string `json:"availability"`
 	ActivityRate string `json:"activityRate"`
-	WorkPermit   string `json:"workPermit"`
 	PrimaryColor string `json:"primaryColor"`
 	AccentColor  string `json:"accentColor"`
 }

@@ -30,9 +30,9 @@ type coverLetterTemplateData struct {
 }
 
 func (p *HTMLParser) ParseResume(templateName string, resume models.Resume, labels map[string]string) (string, error) {
-	templatePath := filepath.Join(templatesPath, "cv", templateName, "template.html")
+	templatePath := filepath.Join(templatesPath, "cv", templateName, "template.gohtml")
 
-	tmpl, err := template.New("template.html").Funcs(funcs).ParseFiles(templatePath)
+	tmpl, err := template.New("template.gohtml").Funcs(funcs).ParseFiles(templatePath)
 	if err != nil {
 		return "", err
 	}
@@ -65,9 +65,9 @@ func (p *HTMLParser) ParseResume(templateName string, resume models.Resume, labe
 }
 
 func (p *HTMLParser) ParseCoverLetter(templateName string, coverLetter models.CoverLetter, labels map[string]string) (string, error) {
-	templatePath := filepath.Join(templatesPath, "cover-letter", templateName, "template.html")
+	templatePath := filepath.Join(templatesPath, "cover-letter", templateName, "template.gohtml")
 
-	tmpl, err := template.New("template.html").Funcs(funcs).ParseFiles(templatePath)
+	tmpl, err := template.New("template.gohtml").Funcs(funcs).ParseFiles(templatePath)
 	if err != nil {
 		return "", fmt.Errorf("failed to parse template: %w", err)
 	}
@@ -100,9 +100,9 @@ func (p *HTMLParser) ParseCoverLetter(templateName string, coverLetter models.Co
 }
 
 func (p *HTMLParser) ParseResumeHTML(templateName string, resume models.Resume, labels map[string]string) (string, error) {
-	templatePath := filepath.Join(templatesPath, "cv", templateName, "template.html")
+	templatePath := filepath.Join(templatesPath, "cv", templateName, "template.gohtml")
 
-	tmpl, err := template.New("template.html").Funcs(funcs).ParseFiles(templatePath)
+	tmpl, err := template.New("template.gohtml").Funcs(funcs).ParseFiles(templatePath)
 	if err != nil {
 		return "", err
 	}
@@ -121,9 +121,9 @@ func (p *HTMLParser) ParseResumeHTML(templateName string, resume models.Resume, 
 }
 
 func (p *HTMLParser) ParseCoverLetterHTML(templateName string, coverLetter models.CoverLetter, labels map[string]string) (string, error) {
-	templatePath := filepath.Join(templatesPath, "cover-letter", templateName, "template.html")
+	templatePath := filepath.Join(templatesPath, "cover-letter", templateName, "template.gohtml")
 
-	tmpl, err := template.New("template.html").Funcs(funcs).ParseFiles(templatePath)
+	tmpl, err := template.New("template.gohtml").Funcs(funcs).ParseFiles(templatePath)
 	if err != nil {
 		return "", fmt.Errorf("failed to parse template: %w", err)
 	}
