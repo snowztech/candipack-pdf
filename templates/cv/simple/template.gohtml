@@ -368,7 +368,7 @@
                 <div class="contact-row">
                     {{- if .Basics.Email}}<span><a href="mailto:{{.Basics.Email}}">{{.Basics.Email}}</a></span>{{end -}}
                     {{- if .Basics.Phone}}<span><a href="tel:{{.Basics.Phone}}">{{.Basics.Phone}}</a></span>{{end -}}
-                    {{- if .Basics.Location.City}}<span>{{displayLocation .Basics.Location}}</span>{{end -}}
+                    {{- if or .Basics.Location.Address .Basics.Location.City .Basics.Location.Region .Basics.Location.CountryCode}}<span>{{displayLocation .Basics.Location}}</span>{{end -}}
                 </div>
                 {{if or .Basics.URL .Basics.Profiles}}
                 <div class="contact-row">
