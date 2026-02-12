@@ -96,7 +96,17 @@ func formatDate(layout string, date string, locale string) string {
 	for _, format := range dateFormats {
 		t, err := time.Parse(format, date)
 		if err == nil {
-			return monday.Format(t, layout, mondayLocale)
+			// Choose output format based on input precision
+			var outputLayout string
+			switch format {
+			case "2006": // Year only
+				outputLayout = "2006"
+			case "2006-01", "January 2006": // Year + month
+				outputLayout = "January 2006"
+			default: // Full date or others
+				outputLayout = layout
+			}
+			return monday.Format(t, outputLayout, mondayLocale)
 		}
 	}
 
